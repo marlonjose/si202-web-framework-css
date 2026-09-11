@@ -19,7 +19,7 @@ Projeto da disciplina: painel administrativo de controle de estoque de produtos 
 
 O produto é um painel administrativo de estoque denso em dados: tabelas com ordenação e seleção em lote, modais de CRUD, formulários com prefixo monetário e badges de status. O Bootstrap 5.3 entrega exatamente esses componentes prontos e acessíveis (tables, modals, forms com validação, badges, dropdowns), reduzindo o tempo de desenvolvimento das telas principais e o risco de inconsistência visual entre módulos.
 
-O grid responsivo de 12 colunas com breakpoints móveis accompanha a anatomia desktop-first definida no `DESIGN.md` (sidebar fixa de 240px + conteúdo fluido) e leva o painel a tablets e celulares sem CSS adicional. A customização via variáveis CSS permite alinhar o tema ao design system do projeto — índigo `#4338CA` como cor primária, estados emerald/amber/red — sem conflitar com o framework. Por fim, é o framework de maior adoção do mercado, com documentação extensa e estável, o que significa curva de aprendizado baixa, contratação fácil e manutenção barata no longo prazo.
+O grid responsivo de 12 colunas com breakpoints móveis acompanha a anatomia desktop-first definida no `DESIGN.md` (sidebar fixa de 240px + conteúdo fluido) e leva o painel a tablets e celulares sem CSS adicional. A customização via variáveis CSS permite alinhar o tema ao design system do projeto — índigo `#4338CA` como cor primária, estados emerald/amber/red — sem conflitar com o framework. Por fim, é o framework de maior adoção do mercado, com documentação extensa e estável, o que significa curva de aprendizado baixa, contratação fácil e manutenção barata no longo prazo.
 
 ### Justificativa comercial — DummyJSON `/products`
 
