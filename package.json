@@ -10,6 +10,7 @@
   "license": "MIT",
   "description": "Projeto da disciplina SI202 - Desenvolvimento de Páginas Web com Framework e CSS",
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "jquery": "^4.0.0",
     "uuid": "^14.0.2"
   },
