@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass scss/style.scss css/style.css",
+    "sass:watch": "sass --watch scss/style.scss css/style.css",
+    "api": "json-server --watch db/db.json --port 3000",
+    "lint": "eslint js/",
+    "format": "prettier --write \"js/**/*.js\" \"scss/*.scss\"",
+    "deploy": "gh-pages -d ."
   },
   "keywords": [],
   "author": "",
@@ -12,9 +17,14 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "jquery": "^4.0.0",
+    "jquery-mask-plugin": "^1.14.16",
     "uuid": "^14.0.2"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "eslint": "^9.39.5",
+    "gh-pages": "^6.3.0",
+    "json-server": "^0.17.4",
+    "prettier": "^3.9.6",
+    "sass": "^1.104.1"
   }
 }
