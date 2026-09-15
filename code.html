@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface": "#131b2e",
+            "surface-bright": "#faf8ff",
+            "surface-dim": "#d2d9f4",
+            "on-primary": "#ffffff",
+            "background": "#faf8ff",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "inverse-on-surface": "#eef0ff",
+            "on-primary-fixed-variant": "#372abf",
+            "secondary-fixed": "#85f8c4",
+            "surface": "#faf8ff",
+            "primary-container": "#4338ca",
+            "on-secondary-fixed": "#002114",
+            "on-tertiary-fixed": "#2f1500",
+            "outline-variant": "#c7c4d7",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#464554",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-secondary-fixed-variant": "#005137",
+            "primary": "#2a14b4",
+            "primary-fixed": "#e3dfff",
+            "on-background": "#131b2e",
+            "on-primary-fixed": "#100069",
+            "tertiary-fixed": "#ffdcc3",
+            "tertiary": "#5c2f00",
+            "surface-container-highest": "#dae2fd",
+            "surface-tint": "#5148d7",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#82f5c1",
+            "secondary": "#006c4a",
+            "tertiary-fixed-dim": "#ffb77d",
+            "surface-container-high": "#e2e7ff",
+            "secondary-fixed-dim": "#68dba9",
+            "tertiary-container": "#7d4200",
+            "inverse-primary": "#c3c0ff",
+            "error": "#ba1a1a",
+            "on-primary-container": "#c1beff",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#283044",
+            "surface-container-low": "#f2f3ff",
+            "surface-container": "#eaedff",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "outline": "#777586",
+            "error-container": "#ffdad6",
+            "surface-variant": "#dae2fd",
+            "on-tertiary-container": "#ffb477",
+            "on-secondary-container": "#00714e"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.375rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-2xl": "3rem",
+            "margin": "2rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "gutter": "1rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-compact": "0.5rem"
+          },
+          fontFamily: {
+            "body-sm": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "headline-lg": ["Inter", "sans-serif"],
+            "headline-xl": ["Inter", "sans-serif"],
+            "label-sm": ["JetBrains Mono", "monospace"],
+            "label-md": ["JetBrains Mono", "monospace"],
+            "data-tabular": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-background font-body-md text-body-md text-on-surface min-h-screen flex flex-col">
+<!-- Top bar -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-b border-surface-container shadow-[0_1px_4px_rgba(0,0,0,0.03)]">
+<div class="h-16 max-w-[1440px] mx-auto px-margin flex items-center justify-between gap-gutter">
+<!-- Logo & Navigation -->
+<div class="flex items-center gap-space-xl">
+<div class="flex items-center gap-space-sm cursor-pointer">
+<img alt="EstoqueFácil Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzPDAswHBVTnN9pEUwZ4MguCv4J5AFZfDEvMv6zZbQ8-V29QmQEVfLpAjgQ264HFMmBMI4xo8Q0d69O_osl5Bn-RI-ZeXacEuYEAaPXDe0yw38f30knObG080GzKcxXYuHuTqy9Mk9RlwqrmwnxGTMaT0EUlc5nYGq_4tsTVLrw8YJXEhaacaCqLNj_02uzo09Xzs0lcL1ip32Bz0EzEUZTXXPGKlawTS5mpjmddjAUjUcW4bWkdqZWg"/>
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">EstoqueFácil</span>
+</div>
+<nav class="hidden md:flex items-center gap-1.5">
+<a class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-primary font-headline-sm text-sm" href="#">Produtos</a>
+<a class="px-space-md py-1.5 rounded-lg font-body-md text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 transition-colors" href="#">Categorias</a>
+<a class="px-space-md py-1.5 rounded-lg font-body-md text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 transition-colors" href="#">Relatórios</a>
+</nav>
+</div>
+<!-- Topbar Right (Quick Search & User Avatar) -->
+<div class="flex items-center gap-space-md">
+<div class="relative w-64 hidden sm:block">
+<span class="material-symbols-outlined text-[18px] absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none select-none">search</span>
+<input class="w-full bg-surface-container-low text-on-surface placeholder:text-outline text-xs pl-9 pr-space-md py-1.5 rounded-lg border border-transparent focus:border-primary/40 focus:bg-surface-container-lowest outline-none transition-all" placeholder="Buscar produtos, SKUs..." type="text"/>
+</div>
+<button aria-label="Notificações" class="relative p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+<div class="flex items-center gap-2.5 pl-2 border-l border-surface-container">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDREOJkZhhwqPelwCaQrIJ_9qYvhthiWkiriJF-yMMuKCrIx38rUlYtkli3D0boVgHvWati3lAaXvwz_Cj9I7_4ivAYXYRkOghIX5t0jHUQF1BoJ2CuClbO0hqjPrZE3XJiLDDzGwe_0KzOI5b2v5KsqgTtkEGwq2-BM35QsI8cHzYnk6WPHGiL2IWyRWy_D3AFKGxqXtWALlDx5NbuCgDIW72PHg7P8OOcP-wH-DYCy1NcL35PJWGofQ"/>
+<div class="hidden lg:flex flex-col text-left">
+<span class="font-medium text-xs text-on-surface leading-tight">Admin / Estudante</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Demonstração</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full pt-16 bg-surface flex-1 flex flex-col">
+<div class="max-w-[1440px] w-full mx-auto px-margin py-8 flex flex-col gap-6">
+<!-- Page Header: Title, Subtitle, and Primary Action Button -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h1 class="font-bold text-2xl lg:text-3xl text-on-surface tracking-tight">Produtos</h1>
+<p class="text-sm text-on-surface-variant mt-1">Gerencie o catálogo de produtos com ações simples de cadastro, edição e exclusão.</p>
+</div>
+<div class="shrink-0">
+<button class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-medium text-sm shadow-sm transition-all active:scale-[0.98]" onclick="openProductModal('create')" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Novo Produto</span>
+</button>
+</div>
+</div>
+<!-- Main Card Container: Toolbar + Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-container shadow-[0_2px_12px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col">
+<!-- Toolbar: Search Input + Category Filter + Counter -->
+<div class="p-4 border-b border-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface-container-lowest">
+<div class="flex flex-1 flex-wrap items-center gap-3">
+<!-- Search Bar -->
+<div class="relative w-full sm:w-80">
+<span class="material-symbols-outlined text-[18px] absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none select-none">search</span>
+<input class="w-full bg-surface-container-low text-on-surface placeholder:text-outline text-sm pl-9 pr-3 py-2 rounded-lg border border-transparent focus:border-primary/40 focus:bg-surface-container-lowest outline-none transition-all" id="searchInput" onkeyup="filterTable()" placeholder="Pesquisar por nome ou código..." type="text"/>
+</div>
+<!-- Category Filter Dropdown -->
+<div class="w-full sm:w-52">
+<select class="w-full bg-surface-container-low text-on-surface text-sm px-3 py-2 rounded-lg border border-transparent focus:border-primary/40 focus:bg-surface-container-lowest outline-none cursor-pointer transition-all" id="categoryFilter" onchange="filterTable()">
+<option value="ALL">Todas as categorias</option>
+<option value="Periféricos">Periféricos</option>
+<option value="Mobiliário">Mobiliário</option>
+<option value="Áudio">Áudio</option>
+<option value="Monitores">Monitores</option>
+<option value="Alimentos">Alimentos</option>
+<option value="Acessórios">Acessórios</option>
+</select>
+</div>
+</div>
+<!-- Product Counter -->
+<div class="text-xs font-medium text-on-surface-variant flex items-center gap-1.5 self-end sm:self-center">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span id="productCounterText">6 produtos cadastrados</span>
+</div>
+</div>
+<!-- Responsive Data Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse" id="productsTable">
+<thead>
+<tr class="bg-surface-container-low/70 border-b border-surface-container text-on-surface-variant font-label-md text-[11px] tracking-wider uppercase">
+<th class="py-3 px-4 font-semibold w-32" scope="col">CÓDIGO/ID</th>
+<th class="py-3 px-4 font-semibold" scope="col">PRODUTO</th>
+<th class="py-3 px-4 font-semibold w-40" scope="col">CATEGORIA</th>
+<th class="py-3 px-4 font-semibold w-32" scope="col">PREÇO</th>
+<th class="py-3 px-4 font-semibold w-32" scope="col">ESTOQUE</th>
+<th class="py-3 px-4 font-semibold text-right w-44" scope="col">AÇÕES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group" data-category="Periféricos" data-sku="SKU-KB-8821">
+<td class="py-3.5 px-4 font-data-tabular text-xs text-on-surface-variant font-medium">SKU-KB-8821</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">keyboard</span>
+</div>
+<span class="font-medium text-on-surface">Teclado Mecânico Pro RGB</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">Periféricos</span>
+</td>
+<td class="py-3.5 px-4 font-data-tabular font-medium text-on-surface">R$ 489,90</td>
+<td class="py-3.5 px-4 font-data-tabular">
+<span class="inline-flex items-center gap-1.5 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    34 unid.
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center justify-end gap-1.5">
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container-high text-xs font-medium transition-colors" onclick="openProductModal('edit', 'Teclado Mecânico Pro RGB', 'SKU-KB-8821', 'Periféricos', '489,90', '34')" title="Editar Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-error hover:bg-error-container/40 text-xs font-medium transition-colors" onclick="confirmDelete('Teclado Mecânico Pro RGB', 'SKU-KB-8821')" title="Excluir Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Excluir</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group" data-category="Mobiliário" data-sku="SKU-CH-9042">
+<td class="py-3.5 px-4 font-data-tabular text-xs text-on-surface-variant font-medium">SKU-CH-9042</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">chair</span>
+</div>
+<span class="font-medium text-on-surface">Cadeira Ergonômica Aero Mesh</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">Mobiliário</span>
+</td>
+<td class="py-3.5 px-4 font-data-tabular font-medium text-on-surface">R$ 1.849,00</td>
+<td class="py-3.5 px-4 font-data-tabular">
+<span class="inline-flex items-center gap-1.5 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    12 unid.
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center justify-end gap-1.5">
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container-high text-xs font-medium transition-colors" onclick="openProductModal('edit', 'Cadeira Ergonômica Aero Mesh', 'SKU-CH-9042', 'Mobiliário', '1.849,00', '12')" title="Editar Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-error hover:bg-error-container/40 text-xs font-medium transition-colors" onclick="confirmDelete('Cadeira Ergonômica Aero Mesh', 'SKU-CH-9042')" title="Excluir Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Excluir</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group" data-category="Áudio" data-sku="SKU-AU-1190">
+<td class="py-3.5 px-4 font-data-tabular text-xs text-on-surface-variant font-medium">SKU-AU-1190</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">headphones</span>
+</div>
+<span class="font-medium text-on-surface">Headphone Wireless ANC Max</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">Áudio</span>
+</td>
+<td class="py-3.5 px-4 font-data-tabular font-medium text-on-surface">R$ 720,00</td>
+<td class="py-3.5 px-4 font-data-tabular">
+<span class="inline-flex items-center gap-1.5 text-tertiary-container font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+                    3 unid. (Baixo)
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center justify-end gap-1.5">
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container-high text-xs font-medium transition-colors" onclick="openProductModal('edit', 'Headphone Wireless ANC Max', 'SKU-AU-1190', 'Áudio', '720,00', '3')" title="Editar Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-error hover:bg-error-container/40 text-xs font-medium transition-colors" onclick="confirmDelete('Headphone Wireless ANC Max', 'SKU-AU-1190')" title="Excluir Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Excluir</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group" data-category="Monitores" data-sku="SKU-MO-3301">
+<td class="py-3.5 px-4 font-data-tabular text-xs text-on-surface-variant font-medium">SKU-MO-3301</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">monitor</span>
+</div>
+<span class="font-medium text-on-surface">Monitor UltraSlim 24" IPS FHD</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">Monitores</span>
+</td>
+<td class="py-3.5 px-4 font-data-tabular font-medium text-on-surface">R$ 899,00</td>
+<td class="py-3.5 px-4 font-data-tabular">
+<span class="inline-flex items-center gap-1.5 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    19 unid.
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center justify-end gap-1.5">
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container-high text-xs font-medium transition-colors" onclick="openProductModal('edit', 'Monitor UltraSlim 24&quot; IPS FHD', 'SKU-MO-3301', 'Monitores', '899,00', '19')" title="Editar Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-error hover:bg-error-container/40 text-xs font-medium transition-colors" onclick="confirmDelete('Monitor UltraSlim 24&quot; IPS FHD', 'SKU-MO-3301')" title="Excluir Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Excluir</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group" data-category="Alimentos" data-sku="SKU-AL-7754">
+<td class="py-3.5 px-4 font-data-tabular text-xs text-on-surface-variant font-medium">SKU-AL-7754</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">local_cafe</span>
+</div>
+<span class="font-medium text-on-surface">Café Especial Torra Média 1kg</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">Alimentos</span>
+</td>
+<td class="py-3.5 px-4 font-data-tabular font-medium text-on-surface">R$ 64,50</td>
+<td class="py-3.5 px-4 font-data-tabular">
+<span class="inline-flex items-center gap-1.5 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    85 unid.
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center justify-end gap-1.5">
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container-high text-xs font-medium transition-colors" onclick="openProductModal('edit', 'Café Especial Torra Média 1kg', 'SKU-AL-7754', 'Alimentos', '64,50', '85')" title="Editar Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-error hover:bg-error-container/40 text-xs font-medium transition-colors" onclick="confirmDelete('Café Especial Torra Média 1kg', 'SKU-AL-7754')" title="Excluir Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Excluir</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group" data-category="Acessórios" data-sku="SKU-AC-5510">
+<td class="py-3.5 px-4 font-data-tabular text-xs text-on-surface-variant font-medium">SKU-AC-5510</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">mouse</span>
+</div>
+<span class="font-medium text-on-surface">Mousepad Extended Deskmat 90x40</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">Acessórios</span>
+</td>
+<td class="py-3.5 px-4 font-data-tabular font-medium text-on-surface">R$ 119,90</td>
+<td class="py-3.5 px-4 font-data-tabular">
+<span class="inline-flex items-center gap-1.5 text-error font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    0 unid. (Esgotado)
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center justify-end gap-1.5">
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container-high text-xs font-medium transition-colors" onclick="openProductModal('edit', 'Mousepad Extended Deskmat 90x40', 'SKU-AC-5510', 'Acessórios', '119,90', '0')" title="Editar Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-error hover:bg-error-container/40 text-xs font-medium transition-colors" onclick="confirmDelete('Mousepad Extended Deskmat 90x40', 'SKU-AC-5510')" title="Excluir Produto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Excluir</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Clean Pagination Info -->
+<div class="px-4 py-3 bg-surface-container-lowest border-t border-surface-container flex items-center justify-between text-xs text-on-surface-variant">
+<span>Mostrando <strong class="text-on-surface font-semibold" id="tableCount">6</strong> de 6 itens</span>
+<div class="flex items-center gap-2 font-label-sm text-xs">
+<span class="text-outline">Página 1 de 1</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-surface-container py-3.5">
+<div class="max-w-[1440px] mx-auto px-margin flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary">EstoqueFácil</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Sistema de Gestão &amp; CRUD Didático © 2025</span>
+</div>
+<div class="inline-flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">school</span>
+<span>Ambiente de Estudo &amp; Demonstração</span>
+</div>
+</div>
+</footer>
+<!-- Create / Edit Product Modal -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-inverse-surface/40 backdrop-blur-xs p-4" id="productModal">
+<div class="bg-surface-container-lowest max-w-lg w-full rounded-xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in duration-150 border border-surface-container">
+<!-- Modal Header -->
+<div class="px-6 py-4 bg-surface-container-low/70 border-b border-surface-container flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">inventory_2</span>
+<div>
+<h3 class="font-bold text-base text-on-surface" id="productModalTitle">Cadastrar Novo Produto</h3>
+<p class="text-xs text-on-surface-variant">Preencha os campos para salvar no inventário.</p>
+</div>
+</div>
+<button class="p-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors" onclick="closeProductModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Form -->
+<form class="p-6 flex flex-col gap-4 text-sm" onsubmit="handleSaveProduct(event)">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-on-surface">Nome do Produto *</label>
+<input class="w-full bg-surface-container-low px-3 py-2 rounded-lg text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" id="formProdName" placeholder="Ex: Teclado Mecânico RGB" required="" type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-on-surface">Código SKU *</label>
+<input class="w-full bg-surface-container-low px-3 py-2 rounded-lg font-data-tabular text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" id="formProdSku" placeholder="Ex: SKU-KB-1001" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-on-surface">Categoria *</label>
+<select class="w-full bg-surface-container-low px-3 py-2 rounded-lg text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all cursor-pointer" id="formProdCategory">
+<option value="Periféricos">Periféricos</option>
+<option value="Mobiliário">Mobiliário</option>
+<option value="Áudio">Áudio</option>
+<option value="Monitores">Monitores</option>
+<option value="Alimentos">Alimentos</option>
+<option value="Acessórios">Acessórios</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-on-surface">Preço (R$) *</label>
+<input class="w-full bg-surface-container-low px-3 py-2 rounded-lg font-data-tabular text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" id="formProdPrice" placeholder="Ex: 489,90" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-on-surface">Estoque (Qtd.) *</label>
+<input class="w-full bg-surface-container-low px-3 py-2 rounded-lg font-data-tabular text-sm outline-none focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" id="formProdQty" min="0" placeholder="0" required="" type="number"/>
+</div>
+</div>
+<!-- Modal Footer Actions -->
+<div class="flex items-center justify-end gap-2 pt-3 border-t border-surface-container mt-2">
+<button class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-medium text-xs transition-colors" onclick="closeProductModal()" type="button">
+            Cancelar
+          </button>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-medium text-xs shadow-sm transition-all" type="submit">
+<span class="material-symbols-outlined text-[16px]">save</span>
+<span>Salvar Produto</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Delete Confirmation Modal -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-inverse-surface/40 backdrop-blur-xs p-4" id="deleteModal">
+<div class="bg-surface-container-lowest max-w-sm w-full rounded-xl shadow-2xl p-6 flex flex-col gap-4 animate-in fade-in zoom-in duration-150 border border-surface-container">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">delete_outline</span>
+</div>
+<div>
+<h3 class="font-bold text-base text-on-surface">Excluir Produto</h3>
+<p class="text-xs text-outline font-data-tabular" id="deleteItemSku"></p>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+        Tem certeza que deseja remover o produto <strong class="text-on-surface font-semibold" id="deleteItemName"></strong>? Esta ação não pode ser desfeita.
+      </p>
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-medium transition-colors" onclick="closeDeleteModal()" type="button">
+          Cancelar
+        </button>
+<button class="px-3.5 py-1.5 rounded-lg bg-error hover:bg-on-error-container text-on-error text-xs font-medium shadow-sm transition-colors" onclick="executeDelete()" type="button">
+          Excluir
+        </button>
+</div>
+</div>
+</div>
+<!-- Notification Toast -->
+<div class="fixed bottom-6 right-6 z-50 hidden transform transition-all duration-300" id="toastNotification">
+<div class="flex items-center gap-2.5 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-lg shadow-xl text-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]" id="toastIcon">check_circle</span>
+<span class="font-medium" id="toastMessage">Operação realizada com sucesso!</span>
+<button class="ml-3 text-outline-variant hover:text-inverse-on-surface" onclick="hideToast()" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+<!-- Interactive JavaScript -->
+<script>
+    let itemToDelete = null;
+
+    function confirmDelete(name, sku) {
+      itemToDelete = { name, sku };
+      document.getElementById('deleteItemName').innerText = name;
+      document.getElementById('deleteItemSku').innerText = sku;
+      document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').classList.add('hidden');
+      itemToDelete = null;
+    }
+
+    function executeDelete() {
+      if (itemToDelete) {
+        // Find and remove table row matching SKU
+        const rows = document.querySelectorAll('#productsTable tbody tr');
+        rows.forEach(row => {
+          if (row.getAttribute('data-sku') === itemToDelete.sku) {
+            row.remove();
+          }
+        });
+        updateCounter();
+      }
+      closeDeleteModal();
+      showToast('Produto excluído com sucesso do catálogo.', 'delete');
+    }
+
+    function openProductModal(mode, name = '', sku = '', cat = 'Periféricos', price = '', qty = '') {
+      const modal = document.getElementById('productModal');
+      const title = document.getElementById('productModalTitle');
+      const nameInput = document.getElementById('formProdName');
+      const skuInput = document.getElementById('formProdSku');
+      const catInput = document.getElementById('formProdCategory');
+      const priceInput = document.getElementById('formProdPrice');
+      const qtyInput = document.getElementById('formProdQty');
+
+      if (mode === 'edit') {
+        title.innerText = 'Editar Produto';
+        nameInput.value = name;
+        skuInput.value = sku;
+        catInput.value = cat;
+        priceInput.value = price;
+        qtyInput.value = qty;
+      } else {
+        title.innerText = 'Cadastrar Novo Produto';
+        nameInput.value = '';
+        skuInput.value = 'SKU-' + Math.floor(1000 + Math.random() * 9000);
+        catInput.value = 'Periféricos';
+        priceInput.value = '';
+        qtyInput.value = '';
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.add('hidden');
+    }
+
+    function handleSaveProduct(e) {
+      e.preventDefault();
+      closeProductModal();
+      showToast('Produto salvo no inventário com sucesso!', 'check_circle');
+    }
+
+    function showToast(msg, icon = 'check_circle') {
+      const toast = document.getElementById('toastNotification');
+      const msgEl = document.getElementById('toastMessage');
+      const iconEl = document.getElementById('toastIcon');
+
+      msgEl.innerText = msg;
+      iconEl.innerText = icon;
+
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        hideToast();
+      }, 3500);
+    }
+
+    function hideToast() {
+      document.getElementById('toastNotification').classList.add('hidden');
+    }
+
+    function filterTable() {
+      const query = (document.getElementById('searchInput').value || '').toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+      const rows = document.querySelectorAll('#productsTable tbody tr');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const rowCat = row.getAttribute('data-category') || '';
+
+        const matchesSearch = text.includes(query);
+        const matchesCat = category === 'ALL' || rowCat === category;
+
+        if (matchesSearch && matchesCat) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      const countEl = document.getElementById('tableCount');
+      if (countEl) countEl.innerText = visibleCount;
+      const counterText = document.getElementById('productCounterText');
+      if (counterText) counterText.innerText = `${visibleCount} produto${visibleCount !== 1 ? 's' : ''} encontrado${visibleCount !== 1 ? 's' : ''}`;
+    }
+
+    function updateCounter() {
+      const rows = document.querySelectorAll('#productsTable tbody tr');
+      const count = rows.length;
+      const countEl = document.getElementById('tableCount');
+      if (countEl) countEl.innerText = count;
+      const counterText = document.getElementById('productCounterText');
+      if (counterText) counterText.innerText = `${count} produto${count !== 1 ? 's' : ''} cadastrado${count !== 1 ? 's' : ''}`;
+    }
+  </script>
+</body></html>

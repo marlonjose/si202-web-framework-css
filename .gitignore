@@ -1,0 +1,6 @@
+# Dependências instaladas pelo NPM (regeneráveis com npm install)
+/node_modules
+
+# Arquivos de segredos e variáveis de ambiente (nunca versionar)
+.env
+.env.*
