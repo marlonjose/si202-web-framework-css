@@ -6,9 +6,13 @@
     "sass": "sass scss/style.scss css/style.css",
     "sass:watch": "sass --watch scss/style.scss css/style.css",
     "api": "json-server --watch db/db.json --port 3000",
+    "copy-libs": "node scripts/copy-libs.js",
+    "postinstall": "node scripts/copy-libs.js",
+    "build:dist": "node scripts/build-dist.js",
     "lint": "eslint js/",
     "format": "prettier --write \"js/**/*.js\" \"scss/*.scss\"",
-    "deploy": "gh-pages -d ."
+    "predeploy": "npm run copy-libs && npm run build:dist",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
