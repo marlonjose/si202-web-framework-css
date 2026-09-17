@@ -1,139 +1,104 @@
 # EstoqueFácil
 
-> Painel administrativo web responsivo para controle de estoque: catálogo de
-> produtos com preços, categorias, status de inventário e operações de CRUD.
+Autor: Marlon José Rodrigues da Silva (GitHub: [@marlonjose](https://github.com/marlonjose))
 
-## Identificação / Autor
+Este projeto tem como objetivo implementar progressivamente e de forma didática uma aplicação web inspirada em operações comuns de gestão de estoque (ex: catálogo de produtos, categorias, preços, status de inventário e operações de CRUD), sendo o diferencial a resiliência offline: quando a API fake não está disponível, a aplicação degrada automaticamente para o Web Storage (localStorage), mantendo o CRUD funcional no navegador. O catálogo também pode importar dados reais da API pública DummyJSON.
 
-**Marlon** — GitHub: [@marlonjose](https://github.com/marlonjose) — projeto
-individual da disciplina **SI202 — Desenvolvimento de Páginas Web com Framework e CSS**.
+O frontend da aplicação foi desenvolvido com HTML, CSS (Bootstrap + Sass) e JavaScript e o backend foi simulado pela implementação de uma API Fake, usando o JSON Server.
 
-## Descrição do projeto
+## 📚 Documentação do Projeto
 
-O EstoqueFácil é um sistema de gestão de estoque de uso simples, voltado a
-pequenos comerciantes. O escopo completo (user stories e regras de negócio) está
-em [`docs/prd.md`](docs/prd.md) e a arquitetura técnica em
-[`docs/architecture.md`](docs/architecture.md).
+Para entender as regras de negócio, o escopo e a arquitetura técnica da aplicação, consulte os documentos abaixo:
 
-O app consome **duas fontes de dados**:
+- 📄 [Product Requirements Document (PRD)](docs/prd.md) - Visão geral, atores e histórias de usuário.
+- 🛠️ [Especificação Técnica (Tech Spec)](docs/spec.md) - Versões exatas das tecnologias, dicionário de dados e rotas da API (JSON Server).
+- 🏗️ [Arquitetura (SDD)](docs/architecture.md) - Estrutura de pastas, módulos JavaScript e fluxo de dados.
 
-- **API fake (JSON Server)** — persiste os produtos cadastrados pelo formulário
-  (entidades `produtos` e `categorias`), executando localmente via `npm run api`;
-  quando indisponível, a aplicação degrada automaticamente para **Web Storage**
-  (localStorage), que é o modo padrão da versão publicada.
-- **API pública real (DummyJSON)** — produtos e categorias reais (com fotos,
-  SKU, preço e estoque) exibidos na página Categorias e importáveis ao catálogo
-  com um clique.
+## 🎨 Design
 
-## Prototipação no Figma
+- 🎨 [Design System](DESIGN.md) - Identidade visual (tokens SCSS aplicados ao Bootstrap).
+- 🖼️ Protótipo interativo - Telas da aplicação geradas por IA (Stitch): [code.html](code.html) + [screen.png](screen.png).
+- 🌐 Site em Produção - GitHub Pages: <https://marlonjose.github.io/si202-web-framework-css/>
 
-- Protótipo navegável gerado por IA (Stitch): [`code.html`](code.html) +
-  [`screen.png`](screen.png)
-- Link do Figma: _(em atualização)_
+## 💻 Tecnologias e Dependências
 
-## Design System
+- Framework CSS: **Bootstrap 5.3.8** (+ **Sass** para o Design System customizado)
+- JavaScript:
+  - **JQuery** - Para realizar animações e manipulação do DOM.
+  - **jQuery Mask Plugin** - Máscaras de moeda e telefone nos formulários.
+  - **uuid** - Identificadores únicos no modo local (Web Storage).
+  - **JSON Server** - Para simular uma API REST.
+- Ferramentas: **ESLint** + **Prettier** (qualidade e padronização do código) e **gh-pages** (deploy).
 
-Documentado em [`DESIGN.md`](DESIGN.md) e implementado como tokens SCSS em
-[`scss/style.scss`](scss/style.scss) (cores, tipografia Inter + JetBrains Mono,
-espaçamento em base 4px, raios e elevações), aplicados sobre o Bootstrap via
-variáveis CSS.
+> As bibliotecas de frontend (Bootstrap, jQuery e jQuery Mask) são **instaladas via NPM** (`package.json`) e servidas localmente, sem links de CDN: o script `npm run copy-libs` copia os arquivos `dist` do `node_modules` para a pasta `vendor/` (não versionada — regenerada pelo próprio `npm i`), que é referenciada pelas páginas HTML. O deploy para o GitHub Pages monta uma pasta `dist/` com o site completo via `npm run build:dist` (também não versionada).
 
-## Framework CSS
+## ✅ Checklist | Indicadores de Desempenho (ID) dos Resultados de Aprendizagem (RA)
 
-**Bootstrap 5.3.8** (via CDN) — grid responsivo, navbar com colapso, tabela,
-formulários, cards, modal de confirmação e badges. Complementado por **Sass**
-para o Design System customizado.
+**RA1 - Utilizar Frameworks CSS para estilização de elementos HTML e criação de layouts responsivos.**
 
-## Dependências
+- [x] ID 01 - Prototipa interfaces adaptáveis para no mínimo os tamanhos de tela mobile e desktop, usando ferramentas de design tradicionais (Figma, Quant UX ou Sketch) ou IA (Stitch). → Protótipo Stitch: `code.html` / `screen.png`
+- [x] ID 02 - Implementa layout responsivo com Framework CSS (Bootstrap, Materialize, Tailwind + DaisyUI) usando Flexbox ou Grid do próprio framework. → Grid do Bootstrap: navbar, `row-cols-*`, `table-responsive`
+- [x] ID 03 - Implementa layout responsivo com CSS puro, usando Flexbox ou Grid Layout. → Cards de estatísticas em CSS Grid (`auto-fit` + `minmax`)
+- [x] ID 04 - Utiliza componentes prontos de um Framework CSS (ex.: card, button) e componentes JavaScript do framework (ex.: modal, carousel). → Navbar, cards, tabela, formulários e modal (JS do Bootstrap)
+- [x] ID 05 - Cria layout fluido usando unidades relativas (vw, vh, %, em, rem) no lugar de unidades fixas (px). → Função SCSS `rem()` e `min-vh-100`
+- [x] ID 06 - Aplica um Design System consistente (cores, tipografia, padrões de componentes) em toda a aplicação. → Tokens SCSS aplicados ao Bootstrap em todas as páginas
+- [x] ID 07 - Utiliza Sass (SCSS) com ou sem framework, aplicando variáveis, mixins e funções para modularizar o código. → Variáveis de token, `@function rem()`, `@mixin card-surface/focus-ring`, mapa `$status-cores` + `@each`
+- [x] ID 08 - Aplica tipografia responsiva (media queries mobile first) ou tipografia fluida (função clamp() + unidades relativas). → Tipografia fluida com `clamp()` (`.page-title`)
+- [x] ID 09 - Aplica técnicas de responsividade de imagens usando CSS (object-fit, containers com unidades relativas). → `object-fit: cover` nas miniaturas da tabela
+- [x] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary). → WebP + `srcset` 1x/2x (`img/placeholder-*.webp`)
 
-| Pacote | Versão | Tipo | Função |
-| --- | --- | --- | --- |
-| `bootstrap` | 5.3.8 | produção | Framework CSS (grid, componentes) |
-| `jquery` | 4.0.0 | produção | Manipulação de DOM, eventos, animações |
-| `jquery-mask-plugin` | 1.14.16 | produção | Máscaras de moeda e telefone |
-| `uuid` | 14.0.2 | produção | Identificadores únicos (modo local) |
-| `gh-pages` | 6.3.0 | dev | Deploy no GitHub Pages |
-| `sass` | 1.104.1 | dev | Compilação do SCSS |
-| `json-server` | 0.17.4 | dev | API fake local |
-| `eslint` / `prettier` | 9.x / 3.x | dev | Qualidade e padronização de código |
+**RA2 - Realizar tratamento de formulários e aplicar validações customizadas no lado cliente.**
 
-> Nas páginas HTML as bibliotecas são carregadas via **CDN** (versões idênticas
-> às do `package.json`) para funcionar no GitHub Pages sem build.
+- [x] ID 11 - Implementa validação HTML nativa (campos obrigatórios, tipos, limites de caracteres) com mensagens de erro/sucesso no lado cliente. → `required`, `minlength`, `pattern`, `min/max` com mensagens em português
+- [x] ID 12 - Aplica expressões regulares (REGEX) para validações customizadas (e-mail, telefone, datas, etc.) → Regex de SKU, preço (moeda BR), e-mail e telefone
+- [x] ID 13 - Utiliza elementos de seleção em formulários (checkbox, radio, select) para coleta de dados. → `select` (categoria), `radio` (situação), `checkbox`/switch (destaque)
+- [x] ID 14 - Implementa leitura e escrita no Web Storage (localStorage/sessionStorage) para persistir dados localmente. → `localStorage` (fallback de persistência) e `sessionStorage` (toast pós-salvamento)
 
-## Site em produção
+**RA3 - Aplicar ferramentas para otimização do processo de desenvolvimento web.**
 
-**https://marlonjose.github.io/si202-web-framework-css/**
+- [x] ID 15 - Configura ambiente com Node.js e NPM para gerenciamento de pacotes e dependências. → Dependências de produção e desenvolvimento no `package.json`
+- [x] ID 16 - Utiliza boas práticas de versionamento no Git/GitHub (branch main ou branches específicos, uso de .gitignore). → Branch `main`, `.gitignore` (node_modules/.env), commits semânticos
+- [x] ID 17 - Mantém um README.md padronizado, conforme template da disciplina, com checklist preenchido. → Este README
+- [x] ID 18 - Organiza arquivos do projeto de forma modular, seguindo padrão de exemplo fornecido. → `js/`, `scss/` + `css/`, `img/`, `db/`, `docs/`
+- [x] ID 19 - Configura linters e formatadores (ESLint, Prettier) para manter qualidade e padronização do código. → ESLint 9 + Prettier (`npm run lint` / `npm run format`)
 
-> Nesta versão publicada a API fake não roda (hospedagem estática): o app opera
-> em **Modo local (Web Storage)** — CRUD completo persistindo no navegador — e a
-> integração com a API pública real funciona normalmente.
+**RA4 - Aplicar bibliotecas de funções e componentes em JavaScript para aprimorar a interatividade de páginas web.**
 
-## Checklist de Funcionalidades (IDs dos Resultados de Aprendizagem)
+- [x] ID 20 - Utiliza jQuery para manipulação do DOM e interatividade (eventos, animações, manipulação de elementos) → Eventos, renderização da tabela e animações `fadeIn`/`fadeOut` do toast
+- [x] ID 21 - Integra e configura um plugin jQuery relevante (ex.: jQuery Mask Plugin). → Máscara de moeda `#.##0,00` (reversa) e telefone `(00) 00000-0000`
 
-### RA1 — Frameworks CSS e layouts responsivos
+**RA5 - Efetuar requisições assíncronas para uma API fake e APIs públicas, permitindo a obtenção e manipulação de dados dinamicamente.**
 
-- [x] **ID 01** — Protótipo adaptável mobile/desktop (Stitch: `code.html` / `screen.png`)
-- [x] **ID 02** — Layout responsivo com grid do Bootstrap (navbar, `row-cols-*`, `table-responsive`)
-- [x] **ID 03** — Layout com CSS puro: cards de estatísticas em **CSS Grid** (`auto-fit` + `minmax`)
-- [x] **ID 04** — Componentes do Bootstrap: navbar, cards, tabela, formulários e **modal** (JS do framework)
-- [x] **ID 05** — Unidades relativas (`rem`, `em`, `%`, `vw`) via função SCSS `rem()` e `min-vh-100`
-- [x] **ID 06** — Design System consistente (tokens SCSS aplicados ao Bootstrap em todas as páginas)
-- [x] **ID 07** — **Sass**: variáveis de token, `@function rem()`, `@mixin card-surface/focus-ring`, mapa `$status-cores` + `@each`
-- [x] **ID 08** — Tipografia fluida com `clamp()` (`.page-title`)
-- [x] **ID 09** — Imagens responsivas com `object-fit: cover` (miniaturas da tabela)
-- [x] **ID 10** — Formato moderno **WebP** + `srcset` 1x/2x (`img/placeholder-*.webp`)
+- [x] ID 22 - Realiza requisições assíncronas para uma API fake (ex.: JSON Server) para persistir dados de um formulário. → `fetch`/`async-await` com `POST`/`PUT /produtos`
+- [x] ID 23 - Realiza requisições assíncronas para uma API fake para exibir dados na página. → `fetch`/`async-await` com `GET /produtos` na tabela
+- [x] ID 24 - Realiza requisições assíncronas para APIs públicas reais (OpenWeather, ViaCEP etc.), exibindo os dados e tratando erros. → **DummyJSON** (`/products`) com exibição de dados e tratamento de erros (timeout, toast/alerta)
 
-### RA2 — Formulários e validações no cliente
+## 🚀 Manual de execução
 
-- [x] **ID 11** — Validação HTML nativa (`required`, `minlength`, `pattern`, `min/max`) com mensagens em português
-- [x] **ID 12** — Regex customizadas: SKU, preço (moeda BR), e-mail e telefone
-- [x] **ID 13** — `select` (categoria), `radio` (situação), `checkbox`/switch (destaque)
-- [x] **ID 14** — **Web Storage**: `localStorage` (fallback de persistência) e `sessionStorage` (toast pós-salvamento)
+1. Clonar o repositório com `git clone`
+2. Fazer checkout no branch `main` que contém as modificações mais recentes
+3. Abrir o projeto no editor Visual Studio Code (VS Code)
+4. Abrir um terminal pelo VSCode ou qualquer terminal do seu Sistema Operacional apontando para o diretório raiz do projeto
+5. Instalar as dependências contidas no package.json
+   - Comando: `npm i`
+   - Ao final da instalação, o script `postinstall` copia automaticamente Bootstrap, jQuery e jQuery Mask do `node_modules` para a pasta `vendor/` (para atualizar manualmente depois de trocar versões: `npm run copy-libs`)
+6. (Opcional) Instalar o JSON Server globalmente disponível em <https://www.npmjs.com/package/json-server>
+   - Comando: `npm i -g json-server`
+   - É opcional porque a dependência já vem cadastrada no arquivo package.json para instalação local na pasta node_modules
+7. Executar a API Fake (JSON Server) via um dos seguintes comandos:
+   - Execução via script registrado no package.json: `npm run api`
+   - Ou via Execução explícita: `json-server --watch db/db.json --port 3000`
+   - O comando para execução do JSON Server deve ser aplicado no diretório raiz do projeto, ou seja, que contém o arquivo `db/db.json`
+   - Por padrão, a aplicação JSON Server executa no endereço localhost:3000
+8. Executar o projeto frontend, escolhendo uma das opções:
+   - Pela extensão Live Server do VS Code (abrir o `index.html`)
+   - Ou via servidor estático: `npx http-server -p 5500 .`
+   - Ou via Python: `python -m http.server 5500`
+9. Acessar <http://localhost:5500>
 
-### RA3 — Ferramentas de otimização do desenvolvimento
+> Sem a API fake o app continua funcional: o selo **"Modo local · Web Storage"** aparece no topo e os dados persistem no navegador. Scripts auxiliares: `npm run sass`, `npm run sass:watch`, `npm run lint`, `npm run format`, `npm run copy-libs` e `npm run deploy` (GitHub Pages — monta a `dist/` e publica automaticamente via `predeploy`).
 
-- [x] **ID 15** — Ambiente Node.js + NPM com dependências de produção e desenvolvimento
-- [x] **ID 16** — Boas práticas Git/GitHub: branch `main`, `.gitignore` (node_modules/.env), commits semânticos
-- [x] **ID 17** — README padronizado com checklist preenchido
-- [x] **ID 18** — Organização modular: `js/`, `scss/`+`css/`, `img/`, `db/`, `docs/`
-- [x] **ID 19** — **ESLint 9** + **Prettier** configurados (`npm run lint` / `npm run format`)
-
-### RA4 — Bibliotecas JavaScript
-
-- [x] **ID 20** — jQuery: eventos, renderização da tabela, animações (`fadeIn`/`fadeOut` do toast)
-- [x] **ID 21** — Plugin **jQuery Mask Plugin** (moeda `#.##0,00` reversa e telefone `(00) 00000-0000`)
-
-### RA5 — Requisições assíncronas e APIs
-
-- [x] **ID 22** — `fetch`/`async-await` **persistindo** dados do formulário na API fake (`POST/PUT /produtos`)
-- [x] **ID 23** — `fetch`/`async-await` **exibindo** dados da API fake na tabela (`GET /produtos`)
-- [x] **ID 24** — API pública real (**DummyJSON**) com exibição de dados e **tratamento de erros** (timeout, toast/alerta)
-
-## Instruções de Execução
-
-```bash
-# 1. Instalar as dependências (uma vez)
-npm install
-
-# 2. Subir a API fake (JSON Server na porta 3000)
-npm run api
-
-# 3. Servir as páginas (em outro terminal, escolha uma opção)
-npx http-server -p 5500 .        # opção A
-python -m http.server 5500        # opção B
-# ou simplesmente abra index.html com a extensão Live Server do VS Code
-
-# 4. Acessar
-# http://localhost:5500
-```
-
-Scripts auxiliares: `npm run sass` (compila CSS), `npm run sass:watch`,
-`npm run lint`, `npm run format`, `npm run deploy` (GitHub Pages).
-
-> Sem a API fake o app continua funcional: o selo **"Modo local · Web Storage"**
-> aparece no topo e os dados persistem no navegador.
-
-## Telas da Aplicação
+## 📱 Telas da aplicação
 
 ### Produtos (listagem, estatísticas, busca e importação da API pública)
 
@@ -149,30 +114,4 @@ Scripts auxiliares: `npm run sass` (compila CSS), `npm run sass:watch`,
 
 ---
 
-## Registros das atividades da disciplina
-
-### Atividade 05 — Escolha do Framework CSS e API Pública
-
-| Item | Escolha | Versão exata |
-| --- | --- | --- |
-| Framework CSS | **Bootstrap** | **5.3.8** |
-| API Pública | **DummyJSON** (endpoint `/products`) | API em produção |
-
-**Justificativa comercial/visual (resumo):** o painel é denso em dados (tabelas,
-modais de CRUD, formulários, badges) e o Bootstrap entrega exatamente esses
-componentes prontos e acessíveis, com grid responsivo compatível com a anatomia
-desktop-first do `DESIGN.md` e customização por variáveis CSS alinhada ao
-design system (índigo `#4338CA`). A DummyJSON espelha o modelo de dados do
-inventário (título, marca, categoria, preço, **estoque**, **SKU**, imagens),
-é gratuita, sem chave de API, com CORS liberado e simula operações de escrita —
-tabela comparativa completa de critérios no histórico de commits.
-
-### Checklist da Atividade 06 — Fundamentos de Ecossistema (Node, NPM e Git)
-
-- [x] Configurei minha identidade no Git (`user.name` e `user.email`)
-- [x] Criei o repositório do meu projeto no GitHub
-- [x] Inicializei o NPM no projeto (`npm init` → `package.json`)
-- [x] Criei o `.gitignore` ignorando `node_modules` e `.env`
-- [x] Instalei `jquery` e `uuid` como dependências de produção
-- [x] Instalei `gh-pages` como dependência de desenvolvimento
-- [x] Fiz commit e push para a branch `main`
+https://github.com/marlonjose/si202-web-framework-css
