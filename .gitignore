@@ -1,6 +1,12 @@
 # Dependências instaladas pelo NPM (regeneráveis com npm install)
 /node_modules
 
+# Cópia local das libs de frontend (regenerável com npm run copy-libs)
+/vendor
+
+# Build de publicação do GitHub Pages (regenerável com npm run build:dist)
+/dist
+
 # Arquivos de segredos e variáveis de ambiente (nunca versionar)
 .env
 .env.*
