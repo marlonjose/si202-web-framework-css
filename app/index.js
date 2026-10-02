@@ -1,5 +1,5 @@
 // =====================================================================
-// EstoqueFácil — página Produtos (index.html)
+// EstoqueFácil — página Produtos (app/index.html)
 // Listagem, filtros, estatísticas, exclusão e importação da API pública
 // =====================================================================
 $(async function () {
@@ -115,7 +115,7 @@ $(async function () {
         seloInativo +
         '</td>' +
         '  <td class="text-end text-nowrap">' +
-        '    <a class="btn btn-sm btn-outline-primary py-1" href="produto.html?id=' +
+        '    <a class="btn btn-sm btn-outline-primary py-1" href="pages/produto/index.html?id=' +
         encodeURIComponent(p.id) +
         '" title="Editar produto">' +
         '      <span class="material-symbols-outlined" style="font-size:16px">edit</span> Editar</a> ' +

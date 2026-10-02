@@ -5,12 +5,12 @@
 // São declarados abaixo para o ESLint entender a arquitetura.
 export default [
   {
-    files: ['js/**/*.js'],
+    files: ['app/**/*.js', 'scripts/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'script',
       globals: {
-        // Bibliotecas carregadas via CDN
+        // Bibliotecas carregadas localmente (assets/libraries)
         $: 'readonly',
         jQuery: 'readonly',
         bootstrap: 'readonly',
@@ -60,9 +60,33 @@ export default [
     },
   },
   {
+    // Scripts de build do Node (CommonJS), fora da página web
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'commonjs',
+      globals: {
+        require: 'readonly',
+        module: 'readonly',
+        process: 'readonly',
+        __dirname: 'readonly',
+        console: 'readonly',
+      },
+    },
+    rules: {
+      'no-undef': 'error',
+    },
+  },
+  {
     // Módulos de definição: as globals declaradas acima são DEFINIDAS aqui
     // e consumidas pelos scripts das páginas.
-    files: ['js/config.js', 'js/api.js', 'js/ui.js'],
+    files: [
+      'app/config.js',
+      'app/model/produto.js',
+      'app/util/formatter.js',
+      'app/service/api.service.js',
+      'app/util/ui.js',
+    ],
     rules: {
       'no-unused-vars': 'off',
       'no-redeclare': 'off',

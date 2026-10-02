@@ -12,15 +12,18 @@ hospedado no GitHub Pages. A lógica roda 100% no navegador:
 
 ```
 ┌──────────────────────────── Navegador ────────────────────────────┐
-│  index.html / produto.html / categorias.html                      │
-│        │  carregam via CDN: Bootstrap 5.3.8, jQuery 4, Mask       │
+│  app/index.html · app/pages/{produto,categorias}/index.html       │
+│        │  carregam localmente (assets/libraries):                 │
+│        │  Bootstrap 5.3.8, jQuery 4, Mask                        │
 │        ▼                                                           │
-│  js/config.js → js/api.js → js/ui.js → js/<página>.js             │
-│        │                            │                              │
-│        ▼                            ▼                              │
-│  Repositório (js/api.js)      ApiPublica (js/api.js)              │
-│   ├─ JSON Server (fake)        └─ DummyJSON (real, CORS ok)       │
-│   └─ fallback: Web Storage                                        │
+│  app/config.js → app/model/produto.js → app/util/formatter.js     │
+│        → app/service/api.service.js → app/util/ui.js              │
+│        → app/util/shell.js → <js da página>                        │
+│        │                                                           │
+│        ▼                                                           │
+│  Repositório (api.service.js)   ApiPublica (api.service.js)       │
+│   ├─ JSON Server (fake)         └─ DummyJSON (real, CORS ok)      │
+│   └─ fallback: Web Storage                                         │
 └───────────────────────────────────────────────────────────────────┘
 ```
 
@@ -33,28 +36,41 @@ produção.
 
 ## 2. Estrutura de arquivos (organização modular — ID 18)
 
+Seguindo o padrão de exemplo da disciplina (páginas autocontidas em
+`app/pages/<nome>/` com CSS/JS locais, camadas `model/`, `service/` e `util/`,
+bibliotecas em `assets/libraries` e recursos em `assets/resources`):
+
 ```
 .
-├── index.html          # Listagem: busca, filtro, estatísticas, CRUD, importação
-├── produto.html        # Formulário de cadastro/edição (?id= para editar)
-├── categorias.html     # Cards: categorias locais + categorias da API pública
-├── css/style.css       # CSS compilado (commitado) a partir do SCSS
-├── scss/style.scss     # Fonte do Design System (variáveis, mixins, função)
-├── js/
-│   ├── config.js       # Constantes, Regex, utilitários puros
-│   ├── api.js          # fetchTimeout, WebStorage, Repositorio, ApiPublica
-│   ├── ui.js           # Toast (jQuery), miniaturas, selo de modo local
-│   ├── produtos.js     # Lógica da listagem (index)
-│   ├── produto-form.js # Lógica do formulário + validações
-│   └── categorias.js   # Lógica da página de categorias
-├── img/                # Placeholders WebP (96/192, usados com srcset)
-├── db/db.json          # Seed do JSON Server (entidades: produtos, categorias)
-└── docs/               # prd.md, architecture.md (este), spec.md, telas/
+├── app/                        # Aplicação (frontend)
+│   ├── index.html              # Listagem: busca, filtro, estatísticas, CRUD, importação
+│   ├── index.js / index.css    # Lógica e estilos da listagem (compilado de scss/home.scss)
+│   ├── style.css               # CSS global compilado (commitado) a partir do SCSS
+│   ├── menu.html / footer.html # Partiais compartilhadas (injetadas pelo util/shell.js)
+│   ├── config.js               # Endpoints e chaves de armazenamento
+│   ├── model/
+│   │   └── produto.js          # Entidade Produto: Regex, status do estoque, SKU, id
+│   ├── service/
+│   │   └── api.service.js      # fetchTimeout, WebStorage, Repositorio, ApiPublica
+│   ├── util/
+│   │   ├── formatter.js        # formatarBRL, parsePrecoBR, slugify, capitalizar, escaparHTML
+│   │   ├── ui.js               # Toast (jQuery), miniaturas, selo de modo local
+│   │   └── shell.js            # Injeção do menu/rodapé + link ativo
+│   └── pages/
+│       ├── produto/            # index.html + produto.js + produto.css (formulário/edição)
+│       └── categorias/         # index.html + categorias.js + categorias.css
+├── assets/
+│   ├── libraries/              # Bootstrap, jQuery e Mask (copiados do node_modules — ID 15)
+│   └── resources/images/       # Placeholders WebP (96/192, usados com srcset)
+├── scss/                       # Fonte do Design System: _tokens.scss + global + por página
+├── scripts/                    # copy-libs.js (node_modules → assets/libraries) e build-dist.js
+├── db/db.json                  # Seed do JSON Server (entidades: produtos, categorias)
+└── docs/                       # prd.md, architecture.md (este), spec.md, design-tokens.md, telas/
 ```
 
 ## 3. Design Tokens (resumo)
 
-Definidos em `scss/style.scss` (fonte de verdade visual: [`DESIGN.md`](../DESIGN.md)).
+Definidos em `scss/_tokens.scss` (fonte de verdade visual: [`design-tokens.md`](design-tokens.md)).
 
 | Token | Valor | Uso |
 | --- | --- | --- |
@@ -125,21 +141,23 @@ ou alerta na página (ID 24).
 
 ## 6. Fluxos de tela
 
-- **index.html** — carrega → `verificarApiFake()` (selo de modo) → lista produtos
-  → estatísticas → busca/filtro no cliente → excluir (modal Bootstrap) →
-  importar (API pública → POST em lote).
-- **produto.html** — popula categorias → modo edição via `?id=` → máscaras →
-  validação (nativa + Regex) com `is-invalid`/`is-valid` → salva → toast via
-  `sessionStorage` → redireciona.
-- **categorias.html** — categorias locais + contagem de produtos → mescla
-  categorias da API pública → cards (Bootstrap `row-cols-*`) com link
-  `index.html?categoria=slug`.
+- **app/index.html** — carrega → injeta menu/rodapé (`shell.js`) → `verificarApiFake()`
+  (selo de modo) → lista produtos → estatísticas → busca/filtro no cliente →
+  excluir (modal Bootstrap) → importar (API pública → POST em lote).
+- **app/pages/produto/index.html** — popula categorias → modo edição via `?id=` →
+  máscaras → validação (nativa + Regex) com `is-invalid`/`is-valid` → salva →
+  toast via `sessionStorage` → redireciona.
+- **app/pages/categorias/index.html** — categorias locais + contagem de produtos →
+  mescla categorias da API pública → cards (Bootstrap `row-cols-*`) com link
+  `../../index.html?categoria=slug`.
 
 ## 7. Ferramentas de desenvolvimento
 
 | Ferramenta | Uso |
 | --- | --- |
-| `npm run sass` / `sass:watch` | Compila `scss/style.scss` → `css/style.css` |
+| `npm run sass` / `sass:watch` | Compila o SCSS: global + estilos por página → `app/` |
 | `npm run api` | Sobe o JSON Server com `db/db.json` |
+| `npm run copy-libs` | Copia Bootstrap/jQuery/Mask do `node_modules` para `assets/libraries/` (via `postinstall` no `npm i`) |
 | `npm run lint` / `format` | ESLint 9 + Prettier (qualidade/padrão — ID 19) |
+| `npm run build:dist` | Monta o `dist/` publicado (app + assets + docs + redirect) |
 | `npm run deploy` | Publica no GitHub Pages via `gh-pages` |

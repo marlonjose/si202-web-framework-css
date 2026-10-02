@@ -1,5 +1,5 @@
 // =====================================================================
-// EstoqueFácil — camada de dados
+// EstoqueFácil — camada de dados (service)
 //   - Repositorio: API fake (JSON Server) com fallback para Web Storage
 //   - ApiPublica:  dados reais da DummyJSON (ID 22 a 24)
 // =====================================================================
@@ -181,12 +181,3 @@ const ApiPublica = {
     return await resposta.json(); // array de slugs
   },
 };
-
-function capitalizar(texto) {
-  return String(texto)
-    .split(/[\s-]/)
-    .map(function (parte) {
-      return parte.charAt(0).toUpperCase() + parte.slice(1);
-    })
-    .join(' ');
-}

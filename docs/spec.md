@@ -8,7 +8,7 @@
 Painel administrativo de controle de estoque (catálogo de produtos, preços, status de
 inventário e operações de CRUD). Front-end **estático** — HTML + CSS + JavaScript puros,
 **sem build step** — publicado no GitHub Pages. Design system definido em
-[`../DESIGN.md`](../DESIGN.md).
+[`design-tokens.md`](design-tokens.md).
 
 ## 2. Stack e versões exatas
 

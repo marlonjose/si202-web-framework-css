@@ -1,0 +1,12 @@
+// =====================================================================
+// EstoqueFácil — estilos da página Novo/Editar Produto
+// Compila para app/pages/produto/produto.css com: npm run sass
+// =====================================================================
+@use '../tokens' as *;
+
+// Contador de caracteres da descrição (validação visual — ID 11)
+.contador-caracteres {
+  font-size: 0.75rem;
+  color: $outline;
+  font-family: $font-mono;
+}

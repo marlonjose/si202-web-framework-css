@@ -11,7 +11,7 @@ const path = require('node:path');
 
 const raiz = path.resolve(__dirname, '..');
 
-// [origem dentro de node_modules, destino dentro de vendor/]
+// [origem dentro de node_modules, destino dentro de assets/libraries/]
 const arquivos = [
   ['bootstrap/dist/css/bootstrap.min.css', 'bootstrap/bootstrap.min.css'],
   ['bootstrap/dist/js/bootstrap.bundle.min.js', 'bootstrap/bootstrap.bundle.min.js'],
@@ -21,7 +21,7 @@ const arquivos = [
 
 for (const [origem, destino] of arquivos) {
   const de = path.join(raiz, 'node_modules', origem);
-  const para = path.join(raiz, 'vendor', destino);
+  const para = path.join(raiz, 'assets', 'libraries', destino);
 
   if (!fs.existsSync(de)) {
     console.error(`✗ não encontrado: ${origem} — rode "npm i" antes.`);
@@ -31,5 +31,5 @@ for (const [origem, destino] of arquivos) {
 
   fs.mkdirSync(path.dirname(para), { recursive: true });
   fs.copyFileSync(de, para);
-  console.log(`✓ ${origem} → vendor/${destino}`);
+  console.log(`✓ ${origem} → assets/libraries/${destino}`);
 }
