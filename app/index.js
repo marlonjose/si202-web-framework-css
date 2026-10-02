@@ -164,7 +164,7 @@ $(async function () {
   // Importar produtos reais da API pública (ID 24)
   $('#btnImportar').on('click', async function () {
     const $botao = $(this).prop('disabled', true);
-    $botao.find('span:last').text('Importando...');
+    $botao.find('.rotulo-botao').text('Importando...');
     try {
       const lote = await ApiPublica.produtos(6, Math.floor(Math.random() * 180));
       for (const item of lote) {
@@ -176,7 +176,7 @@ $(async function () {
       console.error(erro);
       UI.toast('Falha ao contatar a API pública: ' + erro.message, 'erro');
     } finally {
-      $botao.prop('disabled', false).find('span:last').text('Importar da API pública');
+      $botao.prop('disabled', false).find('.rotulo-botao').text('Importar da API pública');
     }
   });
 
