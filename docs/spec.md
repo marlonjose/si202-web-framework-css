@@ -54,13 +54,7 @@ inventário e operações de CRUD). Front-end **estático** — HTML + CSS + Jav
 
 | Endpoint | Uso no painel |
 | --- | --- |
-| `GET /products?limit={n}&skip={n}` | Paginação da tabela de inventário |
-| `GET /products/{id}` | Detalhe/edição de um produto |
-| `GET /products/search?q={termo}` | Busca por título/marca/descrição |
-| `GET /products/categories` | Filtro por categoria (dropdown) |
-| `GET /products/category/{slug}` | Listagem por categoria |
-| `GET /products?sortBy={campo}&order=asc\|desc` | Ordenação das colunas |
-| `POST /products/add` · `PUT /products/{id}` · `DELETE /products/{id}` | Operações de CRUD (simuladas) |
+| `GET /products?limit={n}&skip={n}&select={campos}` | Importação de produtos reais pelo botão "Importar da API pública" (ID 24) |
 
 ### Mapeamento do modelo de produto (API → tela)
 
