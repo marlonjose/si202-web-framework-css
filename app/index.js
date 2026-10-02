@@ -1,5 +1,5 @@
 // =====================================================================
-// EstoqueFácil — página Produtos (index.html)
+// EstoqueFácil — página Produtos (app/index.html)
 // Listagem, filtros, estatísticas, exclusão e importação da API pública
 // =====================================================================
 $(async function () {
@@ -115,7 +115,7 @@ $(async function () {
         seloInativo +
         '</td>' +
         '  <td class="text-end text-nowrap">' +
-        '    <a class="btn btn-sm btn-outline-primary py-1" href="produto.html?id=' +
+        '    <a class="btn btn-sm btn-outline-primary py-1" href="pages/produto/index.html?id=' +
         encodeURIComponent(p.id) +
         '" title="Editar produto">' +
         '      <span class="material-symbols-outlined" style="font-size:16px">edit</span> Editar</a> ' +
@@ -164,7 +164,7 @@ $(async function () {
   // Importar produtos reais da API pública (ID 24)
   $('#btnImportar').on('click', async function () {
     const $botao = $(this).prop('disabled', true);
-    $botao.find('span:last').text('Importando...');
+    $botao.find('.rotulo-botao').text('Importando...');
     try {
       const lote = await ApiPublica.produtos(6, Math.floor(Math.random() * 180));
       for (const item of lote) {
@@ -176,7 +176,7 @@ $(async function () {
       console.error(erro);
       UI.toast('Falha ao contatar a API pública: ' + erro.message, 'erro');
     } finally {
-      $botao.prop('disabled', false).find('span:last').text('Importar da API pública');
+      $botao.prop('disabled', false).find('.rotulo-botao').text('Importar da API pública');
     }
   });
 

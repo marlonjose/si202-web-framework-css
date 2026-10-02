@@ -1,11 +1,41 @@
 {
   "categorias": [
-    { "id": 1, "slug": "perifericos", "nome": "Periféricos", "icone": "keyboard" },
-    { "id": 2, "slug": "mobiliario", "nome": "Mobiliário", "icone": "chair" },
-    { "id": 3, "slug": "audio", "nome": "Áudio", "icone": "headphones" },
-    { "id": 4, "slug": "monitores", "nome": "Monitores", "icone": "monitor" },
-    { "id": 5, "slug": "alimentos", "nome": "Alimentos", "icone": "local_cafe" },
-    { "id": 6, "slug": "acessorios", "nome": "Acessórios", "icone": "mouse" }
+    {
+      "id": 1,
+      "slug": "perifericos",
+      "nome": "Periféricos",
+      "icone": "keyboard"
+    },
+    {
+      "id": 2,
+      "slug": "mobiliario",
+      "nome": "Mobiliário",
+      "icone": "chair"
+    },
+    {
+      "id": 3,
+      "slug": "audio",
+      "nome": "Áudio",
+      "icone": "headphones"
+    },
+    {
+      "id": 4,
+      "slug": "monitores",
+      "nome": "Monitores",
+      "icone": "monitor"
+    },
+    {
+      "id": 5,
+      "slug": "alimentos",
+      "nome": "Alimentos",
+      "icone": "local_cafe"
+    },
+    {
+      "id": 6,
+      "slug": "acessorios",
+      "nome": "Acessórios",
+      "icone": "mouse"
+    }
   ],
   "produtos": [
     {
@@ -32,7 +62,7 @@
       "marca": "ThunderX3",
       "categoria": "Mobiliário",
       "categoriaSlug": "mobiliario",
-      "preco": 1849.0,
+      "preco": 1849,
       "estoque": 12,
       "situacao": "Ativo",
       "destaque": false,
@@ -49,7 +79,7 @@
       "marca": "SoundCore",
       "categoria": "Áudio",
       "categoriaSlug": "audio",
-      "preco": 720.0,
+      "preco": 720,
       "estoque": 3,
       "situacao": "Ativo",
       "destaque": false,
@@ -66,7 +96,7 @@
       "marca": "LG",
       "categoria": "Monitores",
       "categoriaSlug": "monitores",
-      "preco": 899.0,
+      "preco": 899,
       "estoque": 19,
       "situacao": "Ativo",
       "destaque": true,
@@ -109,6 +139,40 @@
       "descricao": "Base antiderrapante, costura anti-fray, 90x40cm.",
       "imagem": "",
       "origem": "manual"
+    },
+    {
+      "sku": "LAP-LEN-LEN-081",
+      "nome": "Lenovo Yoga 920",
+      "marca": "Lenovo",
+      "categoria": "Laptops",
+      "categoriaSlug": "laptops",
+      "preco": 1099.99,
+      "estoque": 40,
+      "situacao": "Ativo",
+      "destaque": false,
+      "emailFornecedor": "importado@dummyjson.com",
+      "telefoneFornecedor": "(00) 00000-0000",
+      "descricao": "Produto importado da API pública DummyJSON.",
+      "imagem": "https://cdn.dummyjson.com/product-images/laptops/lenovo-yoga-920/thumbnail.webp",
+      "origem": "dummyjson",
+      "id": 7
+    },
+    {
+      "sku": "LAP-DEL-DEL-082",
+      "nome": "New DELL XPS 13 9300 Laptop",
+      "marca": "Dell",
+      "categoria": "Laptops",
+      "categoriaSlug": "laptops",
+      "preco": 1499.99,
+      "estoque": 74,
+      "situacao": "Ativo",
+      "destaque": false,
+      "emailFornecedor": "importado@dummyjson.com",
+      "telefoneFornecedor": "(00) 00000-0000",
+      "descricao": "Produto importado da API pública DummyJSON.",
+      "imagem": "https://cdn.dummyjson.com/product-images/laptops/new-dell-xps-13-9300-laptop/thumbnail.webp",
+      "origem": "dummyjson",
+      "id": 8
     }
   ]
 }

@@ -1,0 +1,21 @@
+<!-- Menu compartilhado, injetado pelo app/util/shell.js em todas as páginas -->
+<header class="app-navbar sticky-top">
+  <nav class="navbar navbar-expand-lg container-xl py-2">
+    <a class="navbar-brand d-flex align-items-center gap-2" data-destino="index.html" href="index.html">
+      <span class="material-symbols-outlined" style="color:#4338ca">inventory_2</span>
+      EstoqueFácil
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav gap-1 mt-2 mt-lg-0">
+        <li class="nav-item"><a class="nav-link" data-chave="produtos" data-destino="index.html" href="index.html">Produtos</a></li>
+        <li class="nav-item"><a class="nav-link" data-chave="categorias" data-destino="pages/categorias/index.html" href="pages/categorias/index.html">Categorias</a></li>
+      </ul>
+      <div class="ms-auto d-flex align-items-center gap-2 mt-2 mt-lg-0">
+        <span id="badgeModo" class="badge-modo-local d-none" title="API fake offline — persistindo no Web Storage">Modo local · Web Storage</span>
+      </div>
+    </div>
+  </nav>
+</header>
