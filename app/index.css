@@ -1,0 +1,192 @@
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.375rem, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e6e8f8;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.stat-card .stat-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.stat-card .stat-value {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.stat-card .stat-label {
+  font-size: 0.75rem;
+  color: #464554;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #e6e8f8;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.08);
+}
+
+.table-app {
+  margin: 0;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+.table-app thead th {
+  background: rgba(242, 243, 255, 0.7);
+  border-bottom: 1px solid #eaedff;
+  color: #464554;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+}
+.table-app tbody tr {
+  border-bottom: 1px solid #f2f3ff;
+  transition: background 0.15s ease;
+}
+.table-app tbody tr:hover {
+  background: rgba(242, 243, 255, 0.5);
+}
+.table-app tbody tr:last-child {
+  border-bottom: 0;
+}
+
+.thumb {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #eaedff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4338ca;
+  flex-shrink: 0;
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-estoque-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid rgba(5, 150, 105, 0.35);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.125rem 0.625rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.badge-estoque-ok::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: #059669;
+}
+
+.badge-estoque-baixo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.125rem 0.625rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.badge-estoque-baixo::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: #d97706;
+}
+
+.badge-estoque-esgotado {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.125rem 0.625rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.badge-estoque-esgotado::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: #dc2626;
+}
+
+.badge-estoque-inativo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #f2f3ff;
+  color: #464554;
+  border: 1px solid rgba(119, 117, 134, 0.35);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.125rem 0.625rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.badge-estoque-inativo::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: #777586;
+}
+
+.estado-vazio {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  color: #464554;
+}
+
+.btn-danger-soft {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+}
+.btn-danger-soft:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+}
+
+/*# sourceMappingURL=index.css.map */
