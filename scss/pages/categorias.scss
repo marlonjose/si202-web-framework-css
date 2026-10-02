@@ -5,8 +5,11 @@
 @use '../tokens' as *;
 
 // Cards de categoria
+// position: relative é obrigatório para o stretched-link do botão cobrir
+// apenas o próprio card (sem isso o overlay estica para a página toda)
 .card-categoria {
   @include card-surface;
+  position: relative;
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;

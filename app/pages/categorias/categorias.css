@@ -2,6 +2,7 @@
   background: #ffffff;
   border: 1px solid #e6e8f8;
   border-radius: 0.5rem;
+  position: relative;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .card-categoria:hover {

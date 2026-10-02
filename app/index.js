@@ -180,9 +180,10 @@ $(async function () {
     }
   });
 
-  // Filtro inicial via querystring (?categoria=slug vem da página Categorias)
+  // Filtro inicial via querystring (?categoria=slug vem da página Categorias).
+  // Capturado aqui, mas aplicado DEPOIS de carregarTudo() — o select só tem
+  // opções válidas depois que montarFiltroCategorias() roda.
   const categoriaInicial = new URLSearchParams(location.search).get('categoria');
-  if (categoriaInicial) $('#filtroCategoria').val(categoriaInicial);
 
   // Toast pendente gravado pelo formulário (SessionStorage — ID 14)
   const toastPendente = sessionStorage.getItem(APP.storageSessao);
@@ -192,4 +193,8 @@ $(async function () {
   }
 
   await carregarTudo();
+
+  if (categoriaInicial) {
+    $('#filtroCategoria').val(categoriaInicial).trigger('change');
+  }
 });
