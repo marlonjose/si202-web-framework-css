@@ -1,6 +1,7 @@
 // =====================================================================
 // EstoqueFácil — página Categorias (app/pages/categorias/index.html)
-// Cards com categorias locais + categorias reais da DummyJSON (ID 24)
+// Cards com as categorias do catálogo (JSON Server) e contagem de
+// produtos por categoria
 // =====================================================================
 $(async function () {
   await Repositorio.verificarApiFake();
@@ -8,42 +9,33 @@ $(async function () {
 
   const $grade = $('#gradeCategorias').empty();
 
-  // Contagem local de produtos por categoria
+  // Produtos do catálogo (JSON Server com fallback para Web Storage)
   const produtos = await Repositorio.listarProdutos();
+
+  // Contagem de produtos por categoria
   const contagem = {};
   produtos.forEach(function (p) {
     const slug = p.categoriaSlug || slugify(p.categoria);
     contagem[slug] = (contagem[slug] || 0) + 1;
   });
 
-  // Categoria local sempre aparece; a pública é mesclada pelo slug
-  const categorias = {}; // slug -> { nome, icone, origem }
+  // Categorias cadastradas (entidade /categorias da API fake)
+  const categorias = {}; // slug -> { nome, icone }
   (await Repositorio.listarCategorias()).forEach(function (cat) {
     categorias[cat.slug] = {
       nome: cat.nome,
       icone: cat.icone || ICONE_PADRAO_CATEGORIA,
-      publica: false,
     };
   });
 
-  let apiFalhou = false;
-  try {
-    const publicas = await ApiPublica.categorias();
-    publicas.forEach(function (slug) {
-      if (!categorias[slug])
-        categorias[slug] = {
-          nome: capitalizar(slug),
-          icone: ICONE_PADRAO_CATEGORIA,
-          publica: true,
-        };
-    });
-  } catch (erro) {
-    console.error(erro);
-    apiFalhou = true;
-  }
-
-  // Tratamento de erro exibido ao usuário (ID 24)
-  if (apiFalhou) $('#alertaApi').removeClass('d-none');
+  // Categorias que só existem em produtos (ex.: importados), para a
+  // página refletir exatamente o que o catálogo tem
+  produtos.forEach(function (p) {
+    const slug = p.categoriaSlug || slugify(p.categoria);
+    if (!categorias[slug]) {
+      categorias[slug] = { nome: p.categoria, icone: ICONE_PADRAO_CATEGORIA };
+    }
+  });
 
   // Montagem dos cards com criação de elementos via DOM (manipulação dinâmica)
   Object.keys(categorias)
@@ -60,19 +52,10 @@ $(async function () {
         $('<span>', { class: 'material-symbols-outlined' }).text(cat.icone)
       );
       const $titulo = $('<h2>', { class: 'h6 fw-bold mb-0 flex-grow-1' }).text(cat.nome);
-      if (cat.publica) {
-        $titulo.append(
-          ' ',
-          $('<span>', {
-            class: 'badge-categoria',
-            title: 'Categoria vinda da API pública DummyJSON',
-          }).text('API')
-        );
-      }
       $cabecalho.append($icone, $titulo);
 
       const $info = $('<p>', { class: 'small text-muted-app mb-3' }).text(
-        total === 1 ? '1 produto no catálogo local' : total + ' produtos no catálogo local'
+        total === 1 ? '1 produto no catálogo' : total + ' produtos no catálogo'
       );
 
       const $botao = $('<a>', {

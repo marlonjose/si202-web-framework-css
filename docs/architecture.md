@@ -113,8 +113,9 @@ própria. O mapa `$status-cores` + `@each` gera as classes `.badge-estoque-*`.
 
 ### Categoria (`db/categorias`)
 
-`{ id, slug, nome, icone }` — as categorias da API pública são mescladas pelo
-`slug` na página Categorias (selo "API").
+`{ id, slug, nome, icone }` — exibidas na página Categorias com a contagem de
+produtos de cada uma (categorias presentes apenas em produtos importados
+também aparecem).
 
 ## 5. Contratos de API
 
@@ -134,10 +135,9 @@ própria. O mapa `$status-cores` + `@each` gera as classes `.badge-estoque-*`.
 | Operação | Endpoint | Uso |
 | --- | --- | --- |
 | Importar produtos | `GET /products?limit&skip&select=...` | Botão "Importar da API pública" |
-| Categorias reais | `GET /products/category-list` | Página Categorias |
 
 Falhas de rede são capturadas (`try/catch` + *timeout*) e reportadas por toast
-ou alerta na página (ID 24).
+na página (ID 24).
 
 ## 6. Fluxos de tela
 
@@ -147,8 +147,8 @@ ou alerta na página (ID 24).
 - **app/pages/produto/index.html** — popula categorias → modo edição via `?id=` →
   máscaras → validação (nativa + Regex) com `is-invalid`/`is-valid` → salva →
   toast via `sessionStorage` → redireciona.
-- **app/pages/categorias/index.html** — categorias locais + contagem de produtos →
-  mescla categorias da API pública → cards (Bootstrap `row-cols-*`) com link
+- **app/pages/categorias/index.html** — categorias do catálogo + contagem de
+  produtos → cards (Bootstrap `row-cols-*`) com link
   `../../index.html?categoria=slug`.
 
 ## 7. Ferramentas de desenvolvimento

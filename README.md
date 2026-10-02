@@ -71,7 +71,7 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 
 - [x] ID 22 - Realiza requisições assíncronas para uma API fake (ex.: JSON Server) para persistir dados de um formulário. → `fetch`/`async-await` com `POST`/`PUT /produtos`
 - [x] ID 23 - Realiza requisições assíncronas para uma API fake para exibir dados na página. → `fetch`/`async-await` com `GET /produtos` na tabela
-- [x] ID 24 - Realiza requisições assíncronas para APIs públicas reais (OpenWeather, ViaCEP etc.), exibindo os dados e tratando erros. → **DummyJSON** (`/products`) com exibição de dados e tratamento de erros (timeout, toast/alerta)
+- [x] ID 24 - Realiza requisições assíncronas para APIs públicas reais (OpenWeather, ViaCEP etc.), exibindo os dados e tratando erros. → **DummyJSON** (`/products`) no botão "Importar da API pública": exibição dos dados importados e tratamento de erros (timeout + toast)
 
 ## 🚀 Manual de execução
 
@@ -109,7 +109,7 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 
 ![Formulário de produto com validações](docs/telas/produto-validacao.png)
 
-### Categorias (locais + reais da API pública)
+### Categorias (do catálogo, com contagem de produtos)
 
 ![Página de categorias](docs/telas/categorias.png)
 

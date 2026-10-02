@@ -24,7 +24,7 @@ rápida e agradável de usar no computador e no celular.
 - Exclusão de produtos com modal de confirmação.
 - Importação de produtos reais de uma API pública (DummyJSON) para enriquecer o
   catálogo.
-- Página de categorias: categorias locais + categorias reais da API pública.
+- Página de categorias: categorias do catálogo com contagem de produtos por categoria.
 - Persistência em API fake (JSON Server) com fallback automático para Web Storage
   quando a API não está disponível (comportamento padrão na versão publicada no
   GitHub Pages).
