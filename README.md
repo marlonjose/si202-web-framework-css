@@ -16,8 +16,8 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 
 ## 🎨 Design
 
-- 🎨 [Design System](DESIGN.md) - Identidade visual (tokens SCSS aplicados ao Bootstrap).
-- 🖼️ Protótipo interativo - Telas da aplicação geradas por IA (Stitch): [code.html](code.html) + [screen.png](screen.png).
+- 🎨 [Design System](docs/design-tokens.md) - Identidade visual (tokens SCSS aplicados ao Bootstrap).
+- 🖼️ Protótipo interativo - Telas da aplicação geradas por IA (Stitch): [code.html](docs/prototipo/code.html) + [screen.png](docs/prototipo/screen.png).
 - 🌐 Site em Produção - GitHub Pages: <https://marlonjose.github.io/si202-web-framework-css/>
 
 ## 💻 Tecnologias e Dependências
@@ -30,22 +30,22 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
   - **JSON Server** - Para simular uma API REST.
 - Ferramentas: **ESLint** + **Prettier** (qualidade e padronização do código) e **gh-pages** (deploy).
 
-> As bibliotecas de frontend (Bootstrap, jQuery e jQuery Mask) são **instaladas via NPM** (`package.json`) e servidas localmente, sem links de CDN: o script `npm run copy-libs` copia os arquivos `dist` do `node_modules` para a pasta `vendor/` (não versionada — regenerada pelo próprio `npm i`), que é referenciada pelas páginas HTML. O deploy para o GitHub Pages monta uma pasta `dist/` com o site completo via `npm run build:dist` (também não versionada).
+> As bibliotecas de frontend (Bootstrap, jQuery e jQuery Mask) são **instaladas via NPM** (`package.json`) e servidas localmente, sem links de CDN: o script `npm run copy-libs` copia os arquivos `dist` do `node_modules` para a pasta `assets/libraries/` (não versionada — regenerada pelo próprio `npm i`), que é referenciada pelas páginas HTML. O deploy para o GitHub Pages monta uma pasta `dist/` com o site completo via `npm run build:dist` (também não versionada).
 
 ## ✅ Checklist | Indicadores de Desempenho (ID) dos Resultados de Aprendizagem (RA)
 
 **RA1 - Utilizar Frameworks CSS para estilização de elementos HTML e criação de layouts responsivos.**
 
-- [x] ID 01 - Prototipa interfaces adaptáveis para no mínimo os tamanhos de tela mobile e desktop, usando ferramentas de design tradicionais (Figma, Quant UX ou Sketch) ou IA (Stitch). → Protótipo Stitch: `code.html` / `screen.png`
+- [x] ID 01 - Prototipa interfaces adaptáveis para no mínimo os tamanhos de tela mobile e desktop, usando ferramentas de design tradicionais (Figma, Quant UX ou Sketch) ou IA (Stitch). → Protótipo Stitch: `docs/prototipo/code.html` / `screen.png`
 - [x] ID 02 - Implementa layout responsivo com Framework CSS (Bootstrap, Materialize, Tailwind + DaisyUI) usando Flexbox ou Grid do próprio framework. → Grid do Bootstrap: navbar, `row-cols-*`, `table-responsive`
 - [x] ID 03 - Implementa layout responsivo com CSS puro, usando Flexbox ou Grid Layout. → Cards de estatísticas em CSS Grid (`auto-fit` + `minmax`)
 - [x] ID 04 - Utiliza componentes prontos de um Framework CSS (ex.: card, button) e componentes JavaScript do framework (ex.: modal, carousel). → Navbar, cards, tabela, formulários e modal (JS do Bootstrap)
 - [x] ID 05 - Cria layout fluido usando unidades relativas (vw, vh, %, em, rem) no lugar de unidades fixas (px). → Função SCSS `rem()` e `min-vh-100`
 - [x] ID 06 - Aplica um Design System consistente (cores, tipografia, padrões de componentes) em toda a aplicação. → Tokens SCSS aplicados ao Bootstrap em todas as páginas
-- [x] ID 07 - Utiliza Sass (SCSS) com ou sem framework, aplicando variáveis, mixins e funções para modularizar o código. → Variáveis de token, `@function rem()`, `@mixin card-surface/focus-ring`, mapa `$status-cores` + `@each`
+- [x] ID 07 - Utiliza Sass (SCSS) com ou sem framework, aplicando variáveis, mixins e funções para modularizar o código. → Tokens em `scss/_tokens.scss` (variáveis, `@function rem()`, `@mixin card-surface/focus-ring`) + um SCSS por página; mapa `$status-cores` + `@each`
 - [x] ID 08 - Aplica tipografia responsiva (media queries mobile first) ou tipografia fluida (função clamp() + unidades relativas). → Tipografia fluida com `clamp()` (`.page-title`)
 - [x] ID 09 - Aplica técnicas de responsividade de imagens usando CSS (object-fit, containers com unidades relativas). → `object-fit: cover` nas miniaturas da tabela
-- [x] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary). → WebP + `srcset` 1x/2x (`img/placeholder-*.webp`)
+- [x] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary). → WebP + `srcset` 1x/2x (`assets/resources/images/placeholder-*.webp`)
 
 **RA2 - Realizar tratamento de formulários e aplicar validações customizadas no lado cliente.**
 
@@ -59,7 +59,7 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 - [x] ID 15 - Configura ambiente com Node.js e NPM para gerenciamento de pacotes e dependências. → Dependências de produção e desenvolvimento no `package.json`
 - [x] ID 16 - Utiliza boas práticas de versionamento no Git/GitHub (branch main ou branches específicos, uso de .gitignore). → Branch `main`, `.gitignore` (node_modules/.env), commits semânticos
 - [x] ID 17 - Mantém um README.md padronizado, conforme template da disciplina, com checklist preenchido. → Este README
-- [x] ID 18 - Organiza arquivos do projeto de forma modular, seguindo padrão de exemplo fornecido. → `js/`, `scss/` + `css/`, `img/`, `db/`, `docs/`
+- [x] ID 18 - Organiza arquivos do projeto de forma modular, seguindo padrão de exemplo fornecido. → `app/` (páginas autocontidas em `app/pages/<nome>/`, camadas `model/`, `service/`, `util/`), `assets/` (`libraries` + `resources`), `scss/`, `db/`, `docs/`
 - [x] ID 19 - Configura linters e formatadores (ESLint, Prettier) para manter qualidade e padronização do código. → ESLint 9 + Prettier (`npm run lint` / `npm run format`)
 
 **RA4 - Aplicar bibliotecas de funções e componentes em JavaScript para aprimorar a interatividade de páginas web.**
@@ -90,11 +90,12 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
    - Ou via Execução explícita: `json-server --watch db/db.json --port 3000`
    - O comando para execução do JSON Server deve ser aplicado no diretório raiz do projeto, ou seja, que contém o arquivo `db/db.json`
    - Por padrão, a aplicação JSON Server executa no endereço localhost:3000
-8. Executar o projeto frontend, escolhendo uma das opções:
-   - Pela extensão Live Server do VS Code (abrir o `index.html`)
-   - Ou via servidor estático: `npx http-server -p 5500 .`
+8. Executar o projeto frontend, escolhendo uma das opções (a página inicial está em `app/index.html`):
+   - Pela extensão Live Server do VS Code (abrir o `app/index.html`)
+   - Ou via servidor estático na raiz do projeto: `npx http-server -p 5500 .`
    - Ou via Python: `python -m http.server 5500`
-9. Acessar <http://localhost:5500>
+   - > As páginas carregam o menu/rodapé via jQuery (`.load`), portanto precisam ser servidas por HTTP (Live Server/http-server) — abrir o arquivo direto pelo navegador (protocolo `file://`) não carrega esses partes.
+9. Acessar <http://localhost:5500/app/>
 
 > Sem a API fake o app continua funcional: o selo **"Modo local · Web Storage"** aparece no topo e os dados persistem no navegador. Scripts auxiliares: `npm run sass`, `npm run sass:watch`, `npm run lint`, `npm run format`, `npm run copy-libs` e `npm run deploy` (GitHub Pages — monta a `dist/` e publica automaticamente via `predeploy`).
 

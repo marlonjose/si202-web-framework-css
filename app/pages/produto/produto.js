@@ -1,5 +1,5 @@
 // =====================================================================
-// EstoqueFácil — página Novo/Editar Produto (produto.html)
+// EstoqueFácil — página Novo/Editar Produto (app/pages/produto/index.html)
 // Validação HTML5 + Regex (ID 11/12) + máscaras jQuery (ID 21)
 // =====================================================================
 $(async function () {
@@ -144,7 +144,7 @@ $(async function () {
         APP.storageSessao,
         produtoEmEdicao ? 'Produto atualizado com sucesso!' : 'Produto cadastrado com sucesso!'
       );
-      location.href = 'index.html';
+      location.href = '../../index.html';
     } catch (erro) {
       console.error(erro);
       botaoSalvar.prop('disabled', false);

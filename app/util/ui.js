@@ -41,8 +41,8 @@ const UI = {
     }
     // Imagem em formato moderno (WebP) com carregamento adaptativo (srcset 1x/2x)
     return (
-      '<img src="img/placeholder-96.webp" ' +
-      'srcset="img/placeholder-96.webp 1x, img/placeholder-192.webp 2x" ' +
+      '<img src="../assets/resources/images/placeholder-96.webp" ' +
+      'srcset="../assets/resources/images/placeholder-96.webp 1x, ../assets/resources/images/placeholder-192.webp 2x" ' +
       'alt="Sem imagem" width="36" height="36" loading="lazy" />'
     );
   },

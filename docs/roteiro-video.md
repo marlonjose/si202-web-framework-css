@@ -147,11 +147,12 @@
 > justificada no README com tabela comparativa de critérios.
 >
 > Mas eu não usei o Bootstrap "cru": o meu **Design System** — documentado no
-> `DESIGN.md` — foi implementado em **Sass**, num arquivo só de tokens: variáveis
-> de cor, tipografia e espaçamento, uma **função** que converte pixel para rem,
-> **mixins** de cartão e de foco, e um mapa de status com `@each` que gera as
-> classes dos badges. Esses tokens são injetados no Bootstrap sobrescrevendo as
-> variáveis CSS dele, e a tipografia dos títulos usa `clamp()` para ficar fluida.
+> `docs/design-tokens.md` — foi implementado em **Sass**, num arquivo de tokens
+> compartilhado: variáveis de cor, tipografia e espaçamento, uma **função** que
+> converte pixel para rem, **mixins** de cartão e de foco, e um mapa de status
+> com `@each` que gera as classes dos badges. Esses tokens são injetados no
+> Bootstrap sobrescrevendo as variáveis CSS dele, e a tipografia dos títulos usa
+> `clamp()` para ficar fluida.
 >
 > No JavaScript, o **jQuery** cuida da manipulação de DOM, eventos e animações
 > — os toasts, por exemplo, entram com `fadeIn` e saem com `fadeOut` — e as
@@ -202,10 +203,10 @@
 | Pergunta | Resposta em uma frase |
 | --- | --- |
 | Por que Bootstrap e não Materialize/Bulma? | Painel admin precisa de tabela, modal, formulário e badges prontos; Bootstrap tem o conjunto mais completo, a melhor documentação e customização via variáveis CSS. |
-| Onde está o Sass no projeto? | `scss/style.scss` compila para `css/style.css` com `npm run sass`; tem variáveis de token, a função `rem()`, mixins e o `@each` que gera os badges de status. |
-| Como funciona o fallback? | `js/api.js`: cada operação tenta o JSON Server com timeout; se falhar, o repositório grava/lê no `localStorage` e ativa o selo de modo local. |
+| Onde está o Sass no projeto? | `scss/_tokens.scss` (tokens compartilhados) + um SCSS por página, compilados para `app/` com `npm run sass`; tem variáveis de token, a função `rem()`, mixins e o `@each` que gera os badges de status. |
+| Como funciona o fallback? | `app/service/api.service.js`: cada operação tenta o JSON Server com timeout; se falhar, o repositório grava/lê no `localStorage` e ativa o selo de modo local. |
 | O que acontece se a DummyJSON cair? | `try/catch` com timeout: o botão de importar mostra toast de erro e a página de categorias exibe alerta e só as categorias locais. |
-| Onde estão as Regex? | `js/config.js` (objeto `REGEX`: SKU, moeda, e-mail, telefone) aplicadas no `js/produto-form.js`. |
+| Onde estão as Regex? | `app/model/produto.js` (objeto `REGEX`: SKU, moeda, e-mail, telefone) aplicadas no `app/pages/produto/produto.js`. |
 | Por que jQuery e JavaScript puro juntos? | RA4 pede jQuery para DOM/eventos/animações (e o plugin de máscara); as requisições usam `fetch`/async-await, que é o padrão atual do RA5. |
 | Duas entidades na API fake? | `produtos` e `categorias` no `db/db.json`, servidas pelo JSON Server. |
 | O site publicado não tem API fake? | Hospedagem estática não roda servidor; o app detecta e opera em Web Storage — decisão documentada no architecture.md. |

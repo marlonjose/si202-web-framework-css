@@ -1,0 +1,65 @@
+// =====================================================================
+// EstoqueFácil — tokens do Design System (compartilhados entre páginas)
+// Fonte de verdade visual: docs/design-tokens.md
+// =====================================================================
+@use 'sass:math';
+
+// Cores
+$primary: #4338ca; // índigo — ações principais
+$primary-hover: #3730a3;
+$primary-deep: #2a14b4; // marca (logotipo)
+$success: #059669; // emerald — estoque OK
+$warning: #d97706; // amber — estoque baixo
+$danger: #dc2626; // red — esgotado / destrutivo
+$danger-hover: #93000a;
+$text: #131b2e; // on-surface
+$text-muted: #464554; // on-surface-variant
+$outline: #777586;
+$border: #c7c4d7; // outline-variant
+$border-soft: #e6e8f8;
+$surface: #faf8ff; // fundo da página
+$surface-low: #f2f3ff;
+$surface-container: #eaedff;
+$surface-high: #e2e7ff;
+$white: #ffffff;
+
+// Tipografia
+$font-ui: 'Inter', system-ui, sans-serif;
+$font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+// Raios e sombras (nível 1 do design system)
+$radius-sm: 0.25rem;
+$radius-lg: 0.5rem;
+$radius-xl: 0.75rem;
+$shadow-1:
+  0 1px 3px 0 rgba(15, 23, 42, 0.08),
+  0 1px 2px -1px rgba(15, 23, 42, 0.08);
+$shadow-3:
+  0 20px 25px -5px rgba(15, 23, 42, 0.1),
+  0 8px 10px -6px rgba(15, 23, 42, 0.06);
+
+// Espaçamento em base 4px
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+
+// ----------------------------- Funções -----------------------------
+// Converte px para rem (unidades relativas — ID 05)
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+// ----------------------------- Mixins -----------------------------
+// Cartão de superfície (cards, painéis, tabelas)
+@mixin card-surface {
+  background: $white;
+  border: 1px solid $border-soft;
+  border-radius: $radius-lg;
+}
+
+// Anel de foco acessível
+@mixin focus-ring($color: $primary) {
+  box-shadow: 0 0 0 3px rgba($color, 0.18);
+}

@@ -1,71 +1,9 @@
 // =====================================================================
-// EstoqueFácil — Design System (SCSS)
-// Compila para css/style.css com: npm run sass
-// Tokens conforme docs/DESIGN.md e protótipo (code.html)
+// EstoqueFácil — Design System (SCSS) — estilos globais
+// Compila para app/style.css com: npm run sass
+// Estilos exclusivos de cada página ficam em home.scss e scss/pages/
 // =====================================================================
-@use 'sass:math';
-@use 'sass:list';
-
-// ----------------------------- Tokens (variáveis) -----------------------------
-// Cores
-$primary: #4338ca; // índigo — ações principais
-$primary-hover: #3730a3;
-$primary-deep: #2a14b4; // marca (logotipo)
-$success: #059669; // emerald — estoque OK
-$warning: #d97706; // amber — estoque baixo
-$danger: #dc2626; // red — esgotado / destrutivo
-$danger-hover: #93000a;
-$text: #131b2e; // on-surface
-$text-muted: #464554; // on-surface-variant
-$outline: #777586;
-$border: #c7c4d7; // outline-variant
-$border-soft: #e6e8f8;
-$surface: #faf8ff; // fundo da página
-$surface-low: #f2f3ff;
-$surface-container: #eaedff;
-$surface-high: #e2e7ff;
-$white: #ffffff;
-
-// Tipografia
-$font-ui: 'Inter', system-ui, sans-serif;
-$font-mono: 'JetBrains Mono', ui-monospace, monospace;
-
-// Raios e sombras (nível 1 do DESIGN.md)
-$radius-sm: 0.25rem;
-$radius-lg: 0.5rem;
-$radius-xl: 0.75rem;
-$shadow-1:
-  0 1px 3px 0 rgba(15, 23, 42, 0.08),
-  0 1px 2px -1px rgba(15, 23, 42, 0.08);
-$shadow-3:
-  0 20px 25px -5px rgba(15, 23, 42, 0.1),
-  0 8px 10px -6px rgba(15, 23, 42, 0.06);
-
-// Espaçamento em base 4px
-$space-xs: 0.25rem;
-$space-sm: 0.5rem;
-$space-md: 1rem;
-$space-lg: 1.5rem;
-$space-xl: 2rem;
-
-// ----------------------------- Funções -----------------------------
-// Converte px para rem (unidades relativas — ID 05)
-@function rem($px) {
-  @return math.div($px, 16) * 1rem;
-}
-
-// ----------------------------- Mixins -----------------------------
-// Cartão de superfície (cards, painéis, tabelas)
-@mixin card-surface {
-  background: $white;
-  border: 1px solid $border-soft;
-  border-radius: $radius-lg;
-}
-
-// Anel de foco acessível
-@mixin focus-ring($color: $primary) {
-  box-shadow: 0 0 0 3px rgba($color, 0.18);
-}
+@use 'tokens' as *;
 
 // ----------------------------- Tema Bootstrap -----------------------------
 // Sobrescreve as variáveis CSS do Bootstrap com os tokens do projeto (ID 06)
@@ -128,7 +66,7 @@ body {
   color: $text-muted;
 }
 
-// ----------------------------- Navbar -----------------------------
+// ----------------------------- Navbar (menu compartilhado) -----------------------------
 .app-navbar {
   background: rgba($white, 0.96);
   backdrop-filter: blur(8px);
@@ -170,156 +108,7 @@ body {
   padding: rem(3) rem(10);
 }
 
-// ----------------------------- Cartões de estatística (CSS Grid puro — ID 03) -----------------------------
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(rem(150), 1fr));
-  gap: $space-md;
-}
-
-.stat-card {
-  @include card-surface;
-  padding: $space-md $space-lg;
-  display: flex;
-  align-items: center;
-  gap: $space-md;
-
-  .stat-icon {
-    width: rem(40);
-    height: rem(40);
-    border-radius: $radius-lg;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .stat-value {
-    font-family: $font-mono;
-    font-size: 1.35rem;
-    font-weight: 600;
-    line-height: 1.1;
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
-    color: $text-muted;
-  }
-}
-
-// ----------------------------- Painel / tabela -----------------------------
-.panel {
-  @include card-surface;
-  overflow: hidden;
-  box-shadow: $shadow-1;
-}
-
-.table-app {
-  margin: 0;
-  font-size: 0.9rem;
-  vertical-align: middle;
-
-  thead th {
-    background: rgba($surface-low, 0.7);
-    border-bottom: 1px solid $surface-container;
-    color: $text-muted;
-    font-family: $font-mono;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: rem(12) rem(16);
-    white-space: nowrap;
-  }
-
-  tbody tr {
-    border-bottom: 1px solid $surface-low;
-    transition: background 0.15s ease;
-
-    &:hover {
-      background: rgba($surface-low, 0.5);
-    }
-
-    &:last-child {
-      border-bottom: 0;
-    }
-  }
-}
-
-// Miniatura do produto (object-fit — ID 09)
-.thumb {
-  width: rem(36);
-  height: rem(36);
-  border-radius: $radius-lg;
-  overflow: hidden;
-  background: $surface-container;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $primary;
-  flex-shrink: 0;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-}
-
-// ----------------------------- Badges de status -----------------------------
-// Mapa de status → cores (gera as classes .badge-estoque-*)
-$status-cores: (
-  'ok': (
-    #ecfdf5,
-    #065f46,
-    $success,
-  ),
-  'baixo': (
-    #fffbeb,
-    #92400e,
-    $warning,
-  ),
-  'esgotado': (
-    #fef2f2,
-    #991b1b,
-    $danger,
-  ),
-  'inativo': (
-    $surface-low,
-    $text-muted,
-    $outline,
-  ),
-);
-
-@each $nome, $cores in $status-cores {
-  $bg: list.nth($cores, 1);
-  $fg: list.nth($cores, 2);
-  $dot: list.nth($cores, 3);
-
-  .badge-estoque-#{$nome} {
-    display: inline-flex;
-    align-items: center;
-    gap: rem(6);
-    background: $bg;
-    color: $fg;
-    border: 1px solid rgba($dot, 0.35);
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: rem(2) rem(10);
-    font-family: $font-mono;
-
-    &::before {
-      content: '';
-      width: rem(6);
-      height: rem(6);
-      border-radius: 50%;
-      background: $dot;
-    }
-  }
-}
-
+// Badge de categoria (tabela da home e cards da página Categorias)
 .badge-categoria {
   display: inline-block;
   background: $surface-container;
@@ -333,36 +122,6 @@ $status-cores: (
 .form-label {
   font-size: 0.8rem;
   font-weight: 600;
-}
-
-.contador-caracteres {
-  font-size: 0.75rem;
-  color: $outline;
-  font-family: $font-mono;
-}
-
-// ----------------------------- Cards de categoria -----------------------------
-.card-categoria {
-  @include card-surface;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-1;
-  }
-
-  .cat-icon {
-    width: rem(44);
-    height: rem(44);
-    border-radius: $radius-lg;
-    background: $surface-container;
-    color: $primary;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
 // ----------------------------- Toast -----------------------------
@@ -392,25 +151,5 @@ $status-cores: (
   .brand {
     color: $primary-deep;
     font-weight: 700;
-  }
-}
-
-// ----------------------------- Estado vazio / carregamento -----------------------------
-.estado-vazio {
-  padding: $space-xl * 2 $space-lg;
-  text-align: center;
-  color: $text-muted;
-}
-
-// Modal: botão destrutivo
-.btn-danger-soft {
-  background: #fee2e2;
-  border: 1px solid #fecaca;
-  color: $danger;
-
-  &:hover {
-    background: $danger;
-    border-color: $danger;
-    color: $white;
   }
 }

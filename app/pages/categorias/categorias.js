@@ -1,5 +1,5 @@
 // =====================================================================
-// EstoqueFácil — página Categorias (categorias.html)
+// EstoqueFácil — página Categorias (app/pages/categorias/index.html)
 // Cards com categorias locais + categorias reais da DummyJSON (ID 24)
 // =====================================================================
 $(async function () {
@@ -77,7 +77,7 @@ $(async function () {
 
       const $botao = $('<a>', {
         class: 'btn btn-sm btn-outline-primary stretched-link',
-        href: 'index.html?categoria=' + encodeURIComponent(slug),
+        href: '../../index.html?categoria=' + encodeURIComponent(slug),
       }).text('Ver produtos');
 
       $card.append($cabecalho, $info, $botao);

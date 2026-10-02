@@ -1,0 +1,29 @@
+// =====================================================================
+// EstoqueFácil — estilos da página Categorias
+// Compila para app/pages/categorias/categorias.css com: npm run sass
+// =====================================================================
+@use '../tokens' as *;
+
+// Cards de categoria
+.card-categoria {
+  @include card-surface;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-1;
+  }
+
+  .cat-icon {
+    width: rem(44);
+    height: rem(44);
+    border-radius: $radius-lg;
+    background: $surface-container;
+    color: $primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
