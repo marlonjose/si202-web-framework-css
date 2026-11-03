@@ -7,8 +7,8 @@ Manual técnico da arquitetura. Versões exatas das tecnologias em
 
 ## 1. Visão geral
 
-Front-end **estático** (HTML5 + CSS3 + JavaScript ES6+), **sem build step**,
-hospedado no GitHub Pages. A lógica roda 100% no navegador:
+Front-end **estático** (HTML5 + CSS3 + JavaScript ES6+), sem bundler — apenas a
+compilação do Sass e a montagem da `dist/` para o deploy — hospedado no GitHub Pages. A lógica roda 100% no navegador:
 
 ```
 ┌──────────────────────────── Navegador ────────────────────────────┐
@@ -44,7 +44,7 @@ bibliotecas em `assets/libraries` e recursos em `assets/resources`):
 .
 ├── app/                        # Aplicação (frontend)
 │   ├── index.html              # Listagem: busca, filtro, estatísticas, CRUD, importação
-│   ├── index.js / index.css    # Lógica e estilos da listagem (compilado de scss/home.scss)
+│   ├── index.js / index.css    # Lógica e estilos da listagem (compilado de scss/pages/home.scss)
 │   ├── style.css               # CSS global compilado (commitado) a partir do SCSS
 │   ├── menu.html / footer.html # Partiais compartilhadas (injetadas pelo util/shell.js)
 │   ├── config.js               # Endpoints e chaves de armazenamento
@@ -62,7 +62,8 @@ bibliotecas em `assets/libraries` e recursos em `assets/resources`):
 ├── assets/
 │   ├── libraries/              # Bootstrap, jQuery e Mask (copiados do node_modules — ID 15)
 │   └── resources/images/       # Placeholders WebP (96/192, usados com srcset)
-├── scss/                       # Fonte do Design System: _tokens.scss + global + por página
+├── scss/                       # Design System em Sass: _variables, _functions, _mixins, _base,
+│                               #   _layout, _components → main.scss (global) + pages/ (uma por página)
 ├── scripts/                    # copy-libs.js (node_modules → assets/libraries) e build-dist.js
 ├── db/db.json                  # Seed do JSON Server (entidades: produtos, categorias)
 └── docs/                       # prd.md, architecture.md (este), spec.md, design-tokens.md, telas/
@@ -70,7 +71,7 @@ bibliotecas em `assets/libraries` e recursos em `assets/resources`):
 
 ## 3. Design Tokens (resumo)
 
-Definidos em `scss/_tokens.scss` (fonte de verdade visual: [`design-tokens.md`](design-tokens.md)).
+Definidos em `scss/_variables.scss` (fonte de verdade visual: [`design-tokens.md`](design-tokens.md)); a função `rem()` fica em `scss/_functions.scss` e os mixins em `scss/_mixins.scss`.
 
 | Token | Valor | Uso |
 | --- | --- | --- |

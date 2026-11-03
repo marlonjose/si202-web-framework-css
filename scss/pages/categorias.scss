@@ -2,7 +2,9 @@
 // EstoqueFácil — estilos da página Categorias
 // Compila para app/pages/categorias/categorias.css com: npm run sass
 // =====================================================================
-@use '../tokens' as *;
+@use '../variables' as *;
+@use '../functions' as *;
+@use '../mixins' as *;
 
 // Cards de categoria
 // position: relative é obrigatório para o stretched-link do botão cobrir
@@ -25,8 +27,6 @@
     border-radius: $radius-lg;
     background: $surface-container;
     color: $primary;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include centralizar-flex;
   }
 }

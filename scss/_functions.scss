@@ -1,0 +1,11 @@
+// =====================================================================
+// EstoqueFácil — _functions.scss
+// Funções Sass reutilizadas por todas as folhas de estilo.
+// =====================================================================
+@use 'sass:math';
+
+// ----------------------------- Funções -----------------------------
+// Converte px para rem (unidades relativas — ID 05)
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}

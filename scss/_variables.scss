@@ -1,8 +1,8 @@
 // =====================================================================
-// EstoqueFácil — tokens do Design System (compartilhados entre páginas)
+// EstoqueFácil — _variables.scss
+// Tokens do Design System: as "decisões de design" do projeto em um só lugar.
 // Fonte de verdade visual: docs/design-tokens.md
 // =====================================================================
-@use 'sass:math';
 
 // Cores
 $primary: #4338ca; // índigo — ações principais
@@ -22,6 +22,20 @@ $surface-low: #f2f3ff;
 $surface-container: #eaedff;
 $surface-high: #e2e7ff;
 $white: #ffffff;
+
+// Fundos suaves dos estados (cartões de estatística e badges)
+$primary-bg: $surface-container;
+$success-bg: #ecfdf5;
+$warning-bg: #fffbeb;
+$danger-bg: #fef2f2;
+$danger-container: #ffdad6; // ícone do modal de exclusão
+$on-danger-container: #ba1a1a;
+$success-light: #68dba9; // ícone do toast (fundo escuro)
+
+// Tamanhos de ícone (Material Symbols)
+$icon-xs: 1rem; // 16px
+$icon-sm: 1.125rem; // 18px
+$icon-lg: 2.125rem; // 34px
 
 // Tipografia
 $font-ui: 'Inter', system-ui, sans-serif;
@@ -44,22 +58,3 @@ $space-sm: 0.5rem;
 $space-md: 1rem;
 $space-lg: 1.5rem;
 $space-xl: 2rem;
-
-// ----------------------------- Funções -----------------------------
-// Converte px para rem (unidades relativas — ID 05)
-@function rem($px) {
-  @return math.div($px, 16) * 1rem;
-}
-
-// ----------------------------- Mixins -----------------------------
-// Cartão de superfície (cards, painéis, tabelas)
-@mixin card-surface {
-  background: $white;
-  border: 1px solid $border-soft;
-  border-radius: $radius-lg;
-}
-
-// Anel de foco acessível
-@mixin focus-ring($color: $primary) {
-  box-shadow: 0 0 0 3px rgba($color, 0.18);
-}

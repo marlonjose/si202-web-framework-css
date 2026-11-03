@@ -22,6 +22,22 @@
   justify-content: center;
   flex-shrink: 0;
 }
+.stat-card .stat-icon--total {
+  background: #eaedff;
+  color: #4338ca;
+}
+.stat-card .stat-icon--ok {
+  background: #ecfdf5;
+  color: #059669;
+}
+.stat-card .stat-icon--baixo {
+  background: #fffbeb;
+  color: #d97706;
+}
+.stat-card .stat-icon--esgotado {
+  background: #fef2f2;
+  color: #dc2626;
+}
 .stat-card .stat-value {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 1.35rem;
@@ -187,6 +203,33 @@
   background: #dc2626;
   border-color: #dc2626;
   color: #ffffff;
+}
+
+.busca-wrapper {
+  min-width: 13.75rem;
+  max-width: 21.25rem;
+}
+
+.busca-icone {
+  font-size: 1.125rem;
+  left: 0.625rem;
+  top: 0.5625rem;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #059669;
+}
+
+.modal-icone-perigo {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #ffdad6;
+  color: #ba1a1a;
 }
 
 /*# sourceMappingURL=index.css.map */

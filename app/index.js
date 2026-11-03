@@ -70,7 +70,7 @@ $(async function () {
     if (lista.length === 0) {
       $corpo.append(
         '<tr><td colspan="6" class="estado-vazio">' +
-          '<span class="material-symbols-outlined" style="font-size:34px;color:#c7c4d7">inventory_2</span>' +
+          '<span class="material-symbols-outlined icon-lg text-borda">inventory_2</span>' +
           '<p class="mb-0 mt-2">Nenhum produto encontrado.</p></td></tr>'
       );
     }
@@ -118,9 +118,9 @@ $(async function () {
         '    <a class="btn btn-sm btn-outline-primary py-1" href="pages/produto/index.html?id=' +
         encodeURIComponent(p.id) +
         '" title="Editar produto">' +
-        '      <span class="material-symbols-outlined" style="font-size:16px">edit</span> Editar</a> ' +
+        '      <span class="material-symbols-outlined icon-xs">edit</span> Editar</a> ' +
         '    <button type="button" class="btn btn-sm btn-outline-danger py-1 btn-excluir" title="Excluir produto">' +
-        '      <span class="material-symbols-outlined" style="font-size:16px">delete</span></button>' +
+        '      <span class="material-symbols-outlined icon-xs">delete</span></button>' +
         '  </td>' +
         '</tr>';
       $corpo.append(linha);

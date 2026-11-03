@@ -6,8 +6,9 @@
 ## 1. Visão geral do projeto
 
 Painel administrativo de controle de estoque (catálogo de produtos, preços, status de
-inventário e operações de CRUD). Front-end **estático** — HTML + CSS + JavaScript puros,
-**sem build step** — publicado no GitHub Pages. Design system definido em
+inventário e operações de CRUD). Front-end **estático** — HTML + CSS + JavaScript puros, sem bundler/framework JS —
+publicado no GitHub Pages. O único pré-processamento é a compilação do Sass
+(`npm run sass`) e a montagem da pasta `dist/` para o deploy (`npm run build:dist`). Design system definido em
 [`design-tokens.md`](design-tokens.md).
 
 ## 2. Stack e versões exatas
@@ -17,19 +18,21 @@ inventário e operações de CRUD). Front-end **estático** — HTML + CSS + Jav
 | Node.js | v22.12.0 (LTS) | Runtime das ferramentas de desenvolvimento |
 | npm | 10.9.0 | Gerenciador de pacotes |
 | **Bootstrap** | **5.3.8** (`^5.3.8` no `package.json`) | **Framework CSS: grid, componentes e utilitários** |
-| jQuery | 4.0.0 (`^4.0.0`) | Manipulação de DOM e requisições AJAX |
+| jQuery | 4.0.0 (`^4.0.0`) | Manipulação de DOM, eventos e animações (requisições via `fetch`/`async-await`) |
 | uuid | 14.0.2 (`^14.0.2`) | Geração de identificadores únicos de produtos |
 | gh-pages | 6.3.0 (`^6.3.0`, devDependency) | Publicação no GitHub Pages |
 
 ### Como carregar as bibliotecas
 
-- `node_modules` **não é versionado** (ver `.gitignore`), portanto as páginas HTML devem
-  carregar Bootstrap e as demais bibliotecas via **CDN oficial** nas versões acima:
+- As bibliotecas de frontend (Bootstrap, jQuery e jQuery Mask) são **instaladas via NPM**
+  e servidas localmente: o script `npm run copy-libs` (executado no `postinstall`) copia os
+  arquivos `dist` do `node_modules` para `assets/libraries/`, que é referenciada pelas páginas.
+- `node_modules`, `assets/libraries/` e `dist/` **não são versionados** (ver `.gitignore`);
+  o deploy (`npm run deploy`) monta a `dist/` com as bibliotecas incluídas e publica no
+  GitHub Pages.
+- Alternativa via CDN oficial (mesmas versões), caso exigido:
   - CSS: `https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css`
-  - JS (bundle, opcional se não usar componentes interativos):
-    `https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js`
-- Para desenvolvimento local com as dependências instaladas (`npm install`), os mesmos
-  arquivos podem ser referenciados a partir de `node_modules/`.
+  - JS: `https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js`
 - **Nunca** alterar manualmente `package-lock.json`; sempre usar `npm install <pacote>`.
 
 ### Regras de tema (design tokens)

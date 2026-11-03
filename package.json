@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "sass": "sass scss/style.scss app/style.css && sass scss/home.scss app/index.css && sass scss/pages/produto.scss app/pages/produto/produto.css && sass scss/pages/categorias.scss app/pages/categorias/categorias.css",
-    "sass:watch": "sass --watch scss/style.scss:app/style.css scss/home.scss:app/index.css scss/pages/produto.scss:app/pages/produto/produto.css scss/pages/categorias.scss:app/pages/categorias/categorias.css",
+    "sass": "sass scss/main.scss app/style.css && sass scss/pages/home.scss app/index.css && sass scss/pages/produto.scss app/pages/produto/produto.css && sass scss/pages/categorias.scss app/pages/categorias/categorias.css",
+    "sass:watch": "sass --watch scss/main.scss:app/style.css scss/pages/home.scss:app/index.css scss/pages/produto.scss:app/pages/produto/produto.css scss/pages/categorias.scss:app/pages/categorias/categorias.css",
     "api": "json-server --watch db/db.json --port 3000",
     "copy-libs": "node scripts/copy-libs.js",
     "postinstall": "node scripts/copy-libs.js",

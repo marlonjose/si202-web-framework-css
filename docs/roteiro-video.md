@@ -203,7 +203,7 @@
 | Pergunta | Resposta em uma frase |
 | --- | --- |
 | Por que Bootstrap e não Materialize/Bulma? | Painel admin precisa de tabela, modal, formulário e badges prontos; Bootstrap tem o conjunto mais completo, a melhor documentação e customização via variáveis CSS. |
-| Onde está o Sass no projeto? | `scss/_tokens.scss` (tokens compartilhados) + um SCSS por página, compilados para `app/` com `npm run sass`; tem variáveis de token, a função `rem()`, mixins e o `@each` que gera os badges de status. |
+| Onde está o Sass no projeto? | `scss/main.scss` (reúne `_variables`, `_functions`, `_mixins`, `_base`, `_layout` e `_components` com `@use`) + um SCSS por página em `scss/pages/`, compilados para `app/` com `npm run sass`; tem variáveis de token, a função `rem()`, mixins e o `@each` que gera os badges de status. |
 | Como funciona o fallback? | `app/service/api.service.js`: cada operação tenta o JSON Server com timeout; se falhar, o repositório grava/lê no `localStorage` e ativa o selo de modo local. |
 | O que acontece se a DummyJSON cair? | `try/catch` com timeout: o botão de importar mostra toast de erro e a operação é abortada sem afetar o catálogo. |
 | Onde estão as Regex? | `app/model/produto.js` (objeto `REGEX`: SKU, moeda, e-mail, telefone) aplicadas no `app/pages/produto/produto.js`. |

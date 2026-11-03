@@ -1,0 +1,103 @@
+// =====================================================================
+// EstoqueFácil — _base.scss
+// Estilos globais: tema do Bootstrap, body, tipografia e utilitários.
+// =====================================================================
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ----------------------------- Tema Bootstrap -----------------------------
+// Sobrescreve as variáveis CSS do Bootstrap com os tokens do projeto (ID 06)
+:root {
+  --bs-primary: #{$primary};
+  --bs-primary-rgb: 67, 56, 202;
+  --bs-body-bg: #{$surface};
+  --bs-body-color: #{$text};
+  --bs-body-font-family: #{$font-ui};
+  --bs-border-color: #{$border-soft};
+  --bs-link-color: #{$primary};
+  --bs-link-hover-color: #{$primary-hover};
+}
+
+.btn-primary {
+  --bs-btn-bg: #{$primary};
+  --bs-btn-border-color: #{$primary};
+  --bs-btn-hover-bg: #{$primary-hover};
+  --bs-btn-hover-border-color: #{$primary-hover};
+  --bs-btn-active-bg: #{$primary-hover};
+  --bs-btn-active-border-color: #{$primary-hover};
+  --bs-btn-disabled-bg: #{$primary};
+  --bs-btn-disabled-border-color: #{$primary};
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #{$primary};
+  --bs-btn-border-color: #{$primary};
+  --bs-btn-hover-bg: #{$primary};
+  --bs-btn-hover-border-color: #{$primary};
+}
+
+.form-control,
+.form-select {
+  &:focus {
+    border-color: $primary;
+    @include focus-ring;
+  }
+}
+
+// ----------------------------- Base -----------------------------
+body {
+  background: $surface;
+  font-family: $font-ui;
+  color: $text;
+}
+
+.mono {
+  font-family: $font-mono;
+}
+
+// Tipografia fluida (ID 08)
+.page-title {
+  font-size: clamp(1.375rem, 1.05rem + 1.1vw, 1.875rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-muted-app {
+  color: $text-muted;
+}
+
+// ----------------------------- Utilitários do Design System -----------------------------
+// Substituem estilos inline: cores vêm dos tokens e medidas em rem (ID 05/06)
+.icon-xs {
+  font-size: $icon-xs;
+}
+
+.icon-sm {
+  font-size: $icon-sm;
+}
+
+.icon-lg {
+  font-size: $icon-lg;
+}
+
+.text-primary-app {
+  color: $primary;
+}
+
+.text-success-app {
+  color: $success;
+}
+
+.text-borda {
+  color: $border;
+}
+
+.border-soft {
+  border-color: $surface-container !important;
+}
+
+// ----------------------------- Formulário -----------------------------
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}

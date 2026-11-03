@@ -1,0 +1,26 @@
+// =====================================================================
+// EstoqueFácil — _mixins.scss
+// Blocos de estilo reutilizáveis (incluídos com @include).
+// =====================================================================
+@use 'variables' as *;
+
+// ----------------------------- Mixins -----------------------------
+// Cartão de superfície (cards, painéis, tabelas)
+@mixin card-surface {
+  background: $white;
+  border: 1px solid $border-soft;
+  border-radius: $radius-lg;
+}
+
+// Anel de foco acessível
+@mixin focus-ring($color: $primary) {
+  box-shadow: 0 0 0 3px rgba($color, 0.18);
+}
+
+// Centraliza o conteúdo na horizontal e na vertical com Flexbox
+// (ícones dos cartões de estatística e dos cards de categoria)
+@mixin centralizar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

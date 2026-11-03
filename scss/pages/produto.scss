@@ -2,11 +2,22 @@
 // EstoqueFácil — estilos da página Novo/Editar Produto
 // Compila para app/pages/produto/produto.css com: npm run sass
 // =====================================================================
-@use '../tokens' as *;
+@use '../variables' as *;
+@use '../functions' as *;
+@use '../mixins' as *;
 
 // Contador de caracteres da descrição (validação visual — ID 11)
 .contador-caracteres {
   font-size: 0.75rem;
   color: $outline;
   font-family: $font-mono;
+}
+
+// Campo SKU + botão "gerar" lado a lado (antes inline no HTML)
+.btn-gerar-sku {
+  width: rem(44);
+}
+
+.input-sku {
+  max-width: calc(100% - #{rem(44)});
 }

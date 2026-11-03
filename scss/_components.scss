@@ -1,0 +1,49 @@
+// =====================================================================
+// EstoqueFácil — _components.scss
+// Componentes visuais reutilizados: selos (badges) e toast de notificação.
+// =====================================================================
+@use 'variables' as *;
+@use 'functions' as *;
+
+// ----------------------------- Selos -----------------------------
+// Selo de modo offline (LocalStorage)
+.badge-modo-local {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  font-size: 0.7rem;
+  border-radius: 999px;
+  padding: rem(3) rem(10);
+}
+
+// Badge de categoria (tabela da home e cards da página Categorias)
+.badge-categoria {
+  display: inline-block;
+  background: $surface-container;
+  color: $text-muted;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  padding: rem(2) rem(10);
+}
+
+// ----------------------------- Toast -----------------------------
+.app-toast {
+  position: fixed;
+  right: $space-lg;
+  bottom: $space-lg;
+  z-index: 1080;
+  display: none;
+  background: #283044;
+  color: #eef0ff;
+  border-radius: $radius-lg;
+  padding: rem(10) rem(16);
+  font-size: 0.85rem;
+  box-shadow: $shadow-3;
+  align-items: center;
+  gap: rem(8);
+
+  .toast-icon {
+    color: $success-light;
+    font-size: $icon-sm;
+  }
+}

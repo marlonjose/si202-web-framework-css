@@ -1,0 +1,10 @@
+// =====================================================================
+// EstoqueFácil — main.scss (folha de estilos global)
+// Ponto de entrada do Sass: junta os módulos e gera app/style.css
+// (npm run sass). Os estilos exclusivos de cada página ficam em
+// scss/pages/ e reutilizam os mesmos módulos (_variables, _functions,
+// _mixins) com @use.
+// =====================================================================
+@use 'base';
+@use 'layout';
+@use 'components';

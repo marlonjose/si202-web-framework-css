@@ -45,16 +45,18 @@ $(async function () {
       const total = contagem[slug] || 0;
 
       const $col = $('<div>', { class: 'col' });
-      const $card = $('<div>', { class: 'card-categoria p-3 h-100' });
+      // Componente Card do Bootstrap (.card + .card-body), com o estilo do Design System (.card-categoria)
+      const $card = $('<div>', { class: 'card card-categoria h-100' });
+      const $corpo = $('<div>', { class: 'card-body p-3' });
 
       const $cabecalho = $('<div>', { class: 'd-flex align-items-center gap-3 mb-2' });
       const $icone = $('<div>', { class: 'cat-icon' }).append(
         $('<span>', { class: 'material-symbols-outlined' }).text(cat.icone)
       );
-      const $titulo = $('<h2>', { class: 'h6 fw-bold mb-0 flex-grow-1' }).text(cat.nome);
+      const $titulo = $('<h2>', { class: 'card-title h6 fw-bold mb-0 flex-grow-1' }).text(cat.nome);
       $cabecalho.append($icone, $titulo);
 
-      const $info = $('<p>', { class: 'small text-muted-app mb-3' }).text(
+      const $info = $('<p>', { class: 'card-text small text-muted-app mb-3' }).text(
         total === 1 ? '1 produto no catálogo' : total + ' produtos no catálogo'
       );
 
@@ -63,7 +65,8 @@ $(async function () {
         href: '../../index.html?categoria=' + encodeURIComponent(slug),
       }).text('Ver produtos');
 
-      $card.append($cabecalho, $info, $botao);
+      $corpo.append($cabecalho, $info, $botao);
+      $card.append($corpo);
       $col.append($card);
       $grade.append($col);
     });

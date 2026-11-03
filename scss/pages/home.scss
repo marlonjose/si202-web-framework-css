@@ -3,7 +3,9 @@
 // Compila para app/index.css com: npm run sass
 // =====================================================================
 @use 'sass:list';
-@use 'tokens' as *;
+@use '../variables' as *;
+@use '../functions' as *;
+@use '../mixins' as *;
 
 // ----------------------------- Cartões de estatística (CSS Grid puro — ID 03) -----------------------------
 .stat-grid {
@@ -23,10 +25,29 @@
     width: rem(40);
     height: rem(40);
     border-radius: $radius-lg;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include centralizar-flex;
     flex-shrink: 0;
+
+    // Variantes de cor (antes inline no HTML)
+    &--total {
+      background: $primary-bg;
+      color: $primary;
+    }
+
+    &--ok {
+      background: $success-bg;
+      color: $success;
+    }
+
+    &--baixo {
+      background: $warning-bg;
+      color: $warning;
+    }
+
+    &--esgotado {
+      background: $danger-bg;
+      color: $danger;
+    }
   }
 
   .stat-value {
@@ -173,4 +194,34 @@ $status-cores: (
     border-color: $danger;
     color: $white;
   }
+}
+
+// ----------------------------- Barra de busca -----------------------------
+.busca-wrapper {
+  min-width: rem(220);
+  max-width: rem(340);
+}
+
+.busca-icone {
+  font-size: $icon-sm;
+  left: rem(10);
+  top: rem(9);
+}
+
+// Indicador (bolinha) do contador de produtos
+.status-dot {
+  display: inline-block;
+  width: rem(8);
+  height: rem(8);
+  border-radius: 50%;
+  background: $success;
+}
+
+// Ícone do modal de exclusão
+.modal-icone-perigo {
+  width: rem(40);
+  height: rem(40);
+  border-radius: 50%;
+  background: $danger-container;
+  color: $on-danger-container;
 }

@@ -1,0 +1,51 @@
+// =====================================================================
+// EstoqueFácil — _layout.scss
+// Estrutura compartilhada pelas páginas: menu superior e rodapé.
+// =====================================================================
+@use 'variables' as *;
+@use 'functions' as *;
+
+// ----------------------------- Navbar (menu compartilhado) -----------------------------
+.app-navbar {
+  background: rgba($white, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $surface-container;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+
+  .navbar-brand {
+    color: $primary-deep;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-link {
+    color: $text-muted;
+    border-radius: $radius-lg;
+    padding: rem(6) rem(14);
+    font-size: 0.9rem;
+
+    &:hover {
+      color: $text;
+      background: rgba($surface-high, 0.6);
+    }
+
+    &.active {
+      color: $primary;
+      background: $surface-high;
+      font-weight: 600;
+    }
+  }
+}
+
+// ----------------------------- Rodapé -----------------------------
+.app-footer {
+  border-top: 1px solid $surface-container;
+  background: $white;
+  font-size: 0.8rem;
+  color: $text-muted;
+
+  .brand {
+    color: $primary-deep;
+    font-weight: 700;
+  }
+}

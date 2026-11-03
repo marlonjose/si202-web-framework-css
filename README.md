@@ -17,8 +17,14 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 ## 🎨 Design
 
 - 🎨 [Design System](docs/design-tokens.md) - Identidade visual (tokens SCSS aplicados ao Bootstrap).
-- 🖼️ Protótipo interativo - Telas da aplicação geradas por IA (Stitch): [code.html](docs/prototipo/code.html) + [screen.png](docs/prototipo/screen.png).
+- 🖼️ Prototipação (Google Stitch) - Protótipo navegável mobile e desktop: <https://stitch.withgoogle.com/projects/17953296490233439770>
+  - Cópia local das telas geradas: [code.html](docs/prototipo/code.html) + [screen.png](docs/prototipo/screen.png).
 - 🌐 Site em Produção - GitHub Pages: <https://marlonjose.github.io/si202-web-framework-css/>
+
+## 🧭 Justificativa das escolhas técnicas
+
+- **Framework CSS: Bootstrap 5.3.8** — sistema de grid e utilitários flexbox maduros para um painel administrativo responsivo, componentes prontos que o protótipo já previa (navbar, cards, tabela, formulários com estados de validação, modal de confirmação) e personalização simples via variáveis CSS/Sass para aplicar a identidade visual (índigo) do Design System. Documentação extensa e grande comunidade.
+- **API pública: DummyJSON (`/products`)** — gratuita, sem chave de API e com CORS liberado (funciona direto do navegador, inclusive no GitHub Pages). Fornece produtos reais com categoria, marca, preço, estoque e foto, que se encaixam no modelo de dados do EstoqueFácil, permitindo enriquecer o catálogo com dados realistas.
 
 ## 💻 Tecnologias e Dependências
 
@@ -37,12 +43,12 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 **RA1 - Utilizar Frameworks CSS para estilização de elementos HTML e criação de layouts responsivos.**
 
 - [x] ID 01 - Prototipa interfaces adaptáveis para no mínimo os tamanhos de tela mobile e desktop, usando ferramentas de design tradicionais (Figma, Quant UX ou Sketch) ou IA (Stitch). → Protótipo Stitch: `docs/prototipo/code.html` / `screen.png`
-- [x] ID 02 - Implementa layout responsivo com Framework CSS (Bootstrap, Materialize, Tailwind + DaisyUI) usando Flexbox ou Grid do próprio framework. → Grid do Bootstrap: navbar, `row-cols-*`, `table-responsive`
+- [x] ID 02 - Implementa layout responsivo com Framework CSS (Bootstrap, Materialize) usando Flexbox ou Grid do próprio framework. → Grid do Bootstrap: navbar, `row-cols-*`, `table-responsive`
 - [x] ID 03 - Implementa layout responsivo com CSS puro, usando Flexbox ou Grid Layout. → Cards de estatísticas em CSS Grid (`auto-fit` + `minmax`)
 - [x] ID 04 - Utiliza componentes prontos de um Framework CSS (ex.: card, button) e componentes JavaScript do framework (ex.: modal, carousel). → Navbar, cards, tabela, formulários e modal (JS do Bootstrap)
-- [x] ID 05 - Cria layout fluido usando unidades relativas (vw, vh, %, em, rem) no lugar de unidades fixas (px). → Função SCSS `rem()` e `min-vh-100`
+- [x] ID 05 - Cria layout fluido usando unidades relativas (vw, vh, %, em, rem) no lugar de unidades fixas (px). → Função SCSS `rem()` em todas as medidas, `min-vh-100` e nenhum estilo inline com `px` (ícones, busca e modal usam classes do Design System)
 - [x] ID 06 - Aplica um Design System consistente (cores, tipografia, padrões de componentes) em toda a aplicação. → Tokens SCSS aplicados ao Bootstrap em todas as páginas
-- [x] ID 07 - Utiliza Sass (SCSS) com ou sem framework, aplicando variáveis, mixins e funções para modularizar o código. → Tokens em `scss/_tokens.scss` (variáveis, `@function rem()`, `@mixin card-surface/focus-ring`) + um SCSS por página; mapa `$status-cores` + `@each`
+- [x] ID 07 - Utiliza Sass (SCSS) com ou sem framework, aplicando variáveis, mixins e funções para modularizar o código. → Sass modular com `@use`: `scss/_variables.scss` (tokens), `_functions.scss` (`@function rem()`), `_mixins.scss` (`card-surface`, `focus-ring`, `centralizar-flex`, reaproveitados em várias páginas), `_base`, `_layout`, `_components` reunidos no `main.scss` + um SCSS por página em `scss/pages/`; mapa `$status-cores` + `@each`
 - [x] ID 08 - Aplica tipografia responsiva (media queries mobile first) ou tipografia fluida (função clamp() + unidades relativas). → Tipografia fluida com `clamp()` (`.page-title`)
 - [x] ID 09 - Aplica técnicas de responsividade de imagens usando CSS (object-fit, containers com unidades relativas). → `object-fit: cover` nas miniaturas da tabela
 - [x] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary). → WebP + `srcset` 1x/2x (`assets/resources/images/placeholder-*.webp`)
@@ -65,7 +71,7 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 **RA4 - Aplicar bibliotecas de funções e componentes em JavaScript para aprimorar a interatividade de páginas web.**
 
 - [x] ID 20 - Utiliza jQuery para manipulação do DOM e interatividade (eventos, animações, manipulação de elementos) → Eventos, renderização da tabela e animações `fadeIn`/`fadeOut` do toast
-- [x] ID 21 - Integra e configura um plugin jQuery relevante (ex.: jQuery Mask Plugin). → Máscara de moeda `#.##0,00` (reversa) e telefone `(00) 00000-0000`
+- [x] ID 21 - Integra e configura um plugin jQuery relevante (ex.: jQuery Mask Plugin) ou outra biblioteca de funções. → Máscara de moeda `#.##0,00` (reversa) e telefone `(00) 00000-0000`
 
 **RA5 - Efetuar requisições assíncronas para uma API fake e APIs públicas, permitindo a obtenção e manipulação de dados dinamicamente.**
 
@@ -81,7 +87,7 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 4. Abrir um terminal pelo VSCode ou qualquer terminal do seu Sistema Operacional apontando para o diretório raiz do projeto
 5. Instalar as dependências contidas no package.json
    - Comando: `npm i`
-   - Ao final da instalação, o script `postinstall` copia automaticamente Bootstrap, jQuery e jQuery Mask do `node_modules` para a pasta `vendor/` (para atualizar manualmente depois de trocar versões: `npm run copy-libs`)
+   - Ao final da instalação, o script `postinstall` copia automaticamente Bootstrap, jQuery e jQuery Mask do `node_modules` para a pasta `assets/libraries/` (para atualizar manualmente depois de trocar versões: `npm run copy-libs`)
 6. (Opcional) Instalar o JSON Server globalmente disponível em <https://www.npmjs.com/package/json-server>
    - Comando: `npm i -g json-server`
    - É opcional porque a dependência já vem cadastrada no arquivo package.json para instalação local na pasta node_modules

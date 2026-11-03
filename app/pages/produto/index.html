@@ -35,7 +35,7 @@
 
         <div class="panel p-4">
           <div class="d-flex align-items-center gap-2 mb-1">
-            <span class="material-symbols-outlined" style="color:#4338ca">inventory_2</span>
+            <span class="material-symbols-outlined text-primary-app">inventory_2</span>
             <h1 class="page-title mb-0" id="formTitulo">Cadastrar Novo Produto</h1>
           </div>
           <p class="text-muted-app small mb-4" id="formSubtitulo">Preencha os campos abaixo. Os marcados com * são obrigatórios.</p>
@@ -52,9 +52,9 @@
               <div class="col-sm-6">
                 <label for="sku" class="form-label">Código SKU *</label>
                 <div class="input-group">
-                  <input type="text" class="form-control mono text-uppercase" id="sku" name="sku" required pattern="SKU-[A-Z]{2}-[0-9]{4}" placeholder="SKU-XX-0000" autocomplete="off" style="max-width:calc(100% - 44px)" />
-                  <button class="btn btn-outline-secondary" type="button" id="btnGerarSku" title="Gerar SKU automático" style="width:44px">
-                    <span class="material-symbols-outlined" style="font-size:18px">autorenew</span>
+                  <input type="text" class="form-control mono text-uppercase input-sku" id="sku" name="sku" required pattern="SKU-[A-Z]{2}-[0-9]{4}" placeholder="SKU-XX-0000" autocomplete="off" />
+                  <button class="btn btn-outline-secondary btn-gerar-sku" type="button" id="btnGerarSku" title="Gerar SKU automático">
+                    <span class="material-symbols-outlined icon-sm">autorenew</span>
                   </button>
                 </div>
                 <div class="invalid-feedback">Formato esperado: SKU-XX-0000 (2 letras e 4 números).</div>
@@ -128,10 +128,10 @@
               </div>
             </div>
 
-            <div class="d-flex justify-content-end gap-2 border-top pt-3 mt-4" style="border-color:#eaedff !important">
+            <div class="d-flex justify-content-end gap-2 border-top border-soft pt-3 mt-4">
               <a href="../../index.html" class="btn btn-outline-secondary btn-sm">Cancelar</a>
               <button type="submit" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
-                <span class="material-symbols-outlined" style="font-size:18px">save</span>
+                <span class="material-symbols-outlined icon-sm">save</span>
                 Salvar Produto
               </button>
             </div>
@@ -143,7 +143,7 @@
   </main>
 
   <div class="app-toast" id="toast" role="status">
-    <span class="material-symbols-outlined" id="toastIcon" style="color:#68dba9;font-size:18px">check_circle</span>
+    <span class="material-symbols-outlined toast-icon" id="toastIcon">check_circle</span>
     <span id="toastMsg">Operação realizada.</span>
   </div>
 
