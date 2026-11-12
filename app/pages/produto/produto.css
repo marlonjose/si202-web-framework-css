@@ -4,12 +4,4 @@
   font-family: "JetBrains Mono", ui-monospace, monospace;
 }
 
-.btn-gerar-sku {
-  width: 2.75rem;
-}
-
-.input-sku {
-  max-width: calc(100% - 2.75rem);
-}
-
 /*# sourceMappingURL=produto.css.map */

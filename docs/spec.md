@@ -19,7 +19,6 @@ publicado no GitHub Pages. O único pré-processamento é a compilação do Sass
 | npm | 10.9.0 | Gerenciador de pacotes |
 | **Bootstrap** | **5.3.8** (`^5.3.8` no `package.json`) | **Framework CSS: grid, componentes e utilitários** |
 | jQuery | 4.0.0 (`^4.0.0`) | Manipulação de DOM, eventos e animações (requisições via `fetch`/`async-await`) |
-| uuid | 14.0.2 (`^14.0.2`) | Geração de identificadores únicos de produtos |
 | gh-pages | 6.3.0 (`^6.3.0`, devDependency) | Publicação no GitHub Pages |
 
 ### Como carregar as bibliotecas
@@ -87,5 +86,5 @@ publicado no GitHub Pages. O único pré-processamento é a compilação do Sass
 - Números, SKUs e datas sempre em `JetBrains Mono` (alinhamento tabular).
 - Exclusão de produto exige modal de confirmação ("Esta ação não pode ser desfeita").
 - Tabelas: cabeçalho fixo, linhas com 12px de padding vertical (modo compacto: 8px).
-- IDs internos gerados com `uuid` quando o produto é criado localmente.
+- IDs internos gerados com `crypto.randomUUID()` (nativo do navegador) quando o produto é criado localmente.
 - Responsividade: grid Bootstrap; sidebar colapsa em < 992px (breakpoint `lg`).

@@ -66,6 +66,18 @@ body {
   color: $text-muted;
 }
 
+// Ícones Material Symbols (antes um <style> repetido no <head> de cada página)
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 // ----------------------------- Utilitários do Design System -----------------------------
 // Substituem estilos inline: cores vêm dos tokens e medidas em rem (ID 05/06)
 .icon-xs {

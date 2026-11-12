@@ -3,6 +3,7 @@
 // Blocos de estilo reutilizáveis (incluídos com @include).
 // =====================================================================
 @use 'variables' as *;
+@use 'functions' as *;
 
 // ----------------------------- Mixins -----------------------------
 // Cartão de superfície (cards, painéis, tabelas)
@@ -15,6 +16,29 @@
 // Anel de foco acessível
 @mixin focus-ring($color: $primary) {
   box-shadow: 0 0 0 3px rgba($color, 0.18);
+}
+
+// Selo de status do estoque: fundo, cor do texto e cor da bolinha
+@mixin badge-estoque($fundo, $texto, $bolinha) {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(6);
+  background: $fundo;
+  color: $texto;
+  border: 1px solid rgba($bolinha, 0.35);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: rem(2) rem(10);
+  font-family: $font-mono;
+
+  &::before {
+    content: '';
+    width: rem(6);
+    height: rem(6);
+    border-radius: 50%;
+    background: $bolinha;
+  }
 }
 
 // Centraliza o conteúdo na horizontal e na vertical com Flexbox

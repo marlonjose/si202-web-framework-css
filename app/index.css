@@ -194,26 +194,9 @@
   color: #464554;
 }
 
-.btn-danger-soft {
-  background: #fee2e2;
-  border: 1px solid #fecaca;
-  color: #dc2626;
-}
-.btn-danger-soft:hover {
-  background: #dc2626;
-  border-color: #dc2626;
-  color: #ffffff;
-}
-
 .busca-wrapper {
   min-width: 13.75rem;
   max-width: 21.25rem;
-}
-
-.busca-icone {
-  font-size: 1.125rem;
-  left: 0.625rem;
-  top: 0.5625rem;
 }
 
 .status-dot {

@@ -11,15 +11,12 @@
   <link href="../../../assets/libraries/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="../../style.css" rel="stylesheet" />
   <link href="produto.css" rel="stylesheet" />
-  <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; line-height: 1; display: inline-block; vertical-align: middle; }
-  </style>
 </head>
 <!-- data-base: prefixo para menu/footer; data-pagina: link ativo no menu -->
 <body class="d-flex flex-column min-vh-100" data-base="../../" data-pagina="produto">
 
   <!-- Menu compartilhado (../../menu.html), injetado pelo util/shell.js -->
-  <div id="appMenu"></div>
+  <div id="div-app-menu"></div>
 
   <main class="container py-4 flex-grow-1">
     <div class="row justify-content-center">
@@ -29,109 +26,109 @@
           <ol class="breadcrumb small">
             <li class="breadcrumb-item"><a href="../../index.html" class="link-underline-opacity-0">Início</a></li>
             <li class="breadcrumb-item"><a href="../../index.html" class="link-underline-opacity-0">Produtos</a></li>
-            <li class="breadcrumb-item active" aria-current="page" id="breadcrumbAtual">Novo Produto</li>
+            <li class="breadcrumb-item active" aria-current="page" id="li-breadcrumb-atual">Novo Produto</li>
           </ol>
         </nav>
 
         <div class="panel p-4">
           <div class="d-flex align-items-center gap-2 mb-1">
-            <span class="material-symbols-outlined text-primary-app">inventory_2</span>
-            <h1 class="page-title mb-0" id="formTitulo">Cadastrar Novo Produto</h1>
+            <span aria-hidden="true" class="material-symbols-outlined text-primary-app">inventory_2</span>
+            <h1 class="page-title mb-0" id="h1-form-titulo">Cadastrar Novo Produto</h1>
           </div>
-          <p class="text-muted-app small mb-4" id="formSubtitulo">Preencha os campos abaixo. Os marcados com * são obrigatórios.</p>
+          <p class="text-muted-app small mb-4" id="p-form-subtitulo">Preencha os campos abaixo. Os marcados com * são obrigatórios.</p>
 
           <!-- Formulário com validação HTML5 nativa + Regex em JS + máscaras jQuery -->
-          <form id="formProduto" novalidate>
+          <form id="form-produto" novalidate>
             <div class="row g-3">
               <div class="col-12">
-                <label for="nome" class="form-label">Nome do Produto *</label>
-                <input type="text" class="form-control" id="nome" name="nome" required minlength="3" maxlength="80" placeholder="Ex: Teclado Mecânico RGB" autocomplete="off" />
+                <label for="input-nome" class="form-label">Nome do Produto *</label>
+                <input type="text" class="form-control" id="input-nome" name="nome" required minlength="3" maxlength="80" placeholder="Ex: Teclado Mecânico RGB" autocomplete="off" />
                 <div class="invalid-feedback">Informe o nome (mínimo de 3 caracteres).</div>
               </div>
 
               <div class="col-sm-6">
-                <label for="sku" class="form-label">Código SKU *</label>
-                <div class="input-group">
-                  <input type="text" class="form-control mono text-uppercase input-sku" id="sku" name="sku" required pattern="SKU-[A-Z]{2}-[0-9]{4}" placeholder="SKU-XX-0000" autocomplete="off" />
-                  <button class="btn btn-outline-secondary btn-gerar-sku" type="button" id="btnGerarSku" title="Gerar SKU automático">
-                    <span class="material-symbols-outlined icon-sm">autorenew</span>
+                <label for="input-sku" class="form-label">Código SKU *</label>
+                <div class="input-group has-validation">
+                  <input type="text" class="form-control mono text-uppercase" id="input-sku" name="sku" required pattern="SKU-[A-Z]{2}-[0-9]{4}" placeholder="SKU-XX-0000" autocomplete="off" />
+                  <button class="btn btn-outline-secondary" type="button" id="button-gerar-sku" title="Gerar SKU automático" aria-label="Gerar SKU automático">
+                    <span aria-hidden="true" class="material-symbols-outlined icon-sm">autorenew</span>
                   </button>
+                  <div class="invalid-feedback">Formato esperado: SKU-XX-0000 (2 letras e 4 números).</div>
                 </div>
-                <div class="invalid-feedback">Formato esperado: SKU-XX-0000 (2 letras e 4 números).</div>
               </div>
 
               <div class="col-sm-6">
-                <label for="categoria" class="form-label">Categoria *</label>
-                <select class="form-select" id="categoria" name="categoria" required>
+                <label for="select-categoria" class="form-label">Categoria *</label>
+                <select class="form-select" id="select-categoria" name="categoria" required>
                   <option value="">Selecione...</option>
                 </select>
                 <div class="invalid-feedback">Selecione uma categoria.</div>
               </div>
 
               <div class="col-sm-6">
-                <label for="preco" class="form-label">Preço (R$) *</label>
-                <div class="input-group">
+                <label for="input-preco" class="form-label">Preço (R$) *</label>
+                <div class="input-group has-validation">
                   <span class="input-group-text mono">R$</span>
-                  <input type="text" class="form-control mono" id="preco" name="preco" required inputmode="decimal" placeholder="0,00" autocomplete="off" />
+                  <input type="text" class="form-control mono" id="input-preco" name="preco" required inputmode="decimal" placeholder="0,00" autocomplete="off" />
+                  <div class="invalid-feedback">Informe um preço válido (ex.: 1.234,56).</div>
                 </div>
-                <div class="invalid-feedback">Informe um preço válido (ex.: 1.234,56).</div>
               </div>
 
               <div class="col-sm-6">
-                <label for="estoque" class="form-label">Estoque (quantidade) *</label>
-                <input type="number" class="form-control mono" id="estoque" name="estoque" required min="0" max="99999" placeholder="0" />
+                <label for="input-estoque" class="form-label">Estoque (quantidade) *</label>
+                <input type="number" class="form-control mono" id="input-estoque" name="estoque" required min="0" max="99999" placeholder="0" />
                 <div class="invalid-feedback">Informe uma quantidade entre 0 e 99999.</div>
               </div>
 
               <div class="col-sm-6">
-                <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca" maxlength="40" placeholder="Ex: Redragon" autocomplete="off" />
+                <label for="input-marca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="input-marca" name="marca" maxlength="40" placeholder="Ex: Redragon" autocomplete="off" />
               </div>
 
-              <div class="col-sm-6">
-                <span class="form-label d-block">Situação *</span>
-                <div class="d-flex gap-3 pt-1" role="radiogroup" aria-label="Situação do produto">
+              <fieldset class="col-sm-6">
+                <legend class="form-label">Situação *</legend>
+                <div class="d-flex gap-3 pt-1">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="situacao" id="situacaoAtivo" value="Ativo" checked />
-                    <label class="form-check-label" for="situacaoAtivo">Ativo</label>
+                    <input class="form-check-input" type="radio" name="situacao" id="input-situacao-ativo" value="Ativo" checked />
+                    <label class="form-check-label" for="input-situacao-ativo">Ativo</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="situacao" id="situacaoInativo" value="Inativo" />
-                    <label class="form-check-label" for="situacaoInativo">Inativo</label>
+                    <input class="form-check-input" type="radio" name="situacao" id="input-situacao-inativo" value="Inativo" />
+                    <label class="form-check-label" for="input-situacao-inativo">Inativo</label>
                   </div>
                 </div>
-              </div>
+              </fieldset>
 
               <div class="col-12">
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="destaque" name="destaque" />
-                  <label class="form-check-label" for="destaque">Produto em destaque na vitrine</label>
+                  <input class="form-check-input" type="checkbox" role="switch" id="input-destaque" name="destaque" />
+                  <label class="form-check-label" for="input-destaque">Produto em destaque na vitrine</label>
                 </div>
               </div>
 
               <div class="col-sm-6">
-                <label for="emailFornecedor" class="form-label">E-mail do Fornecedor *</label>
-                <input type="email" class="form-control" id="emailFornecedor" name="emailFornecedor" required placeholder="contato@empresa.com.br" autocomplete="off" />
+                <label for="input-email-fornecedor" class="form-label">E-mail do Fornecedor *</label>
+                <input type="email" class="form-control" id="input-email-fornecedor" name="emailFornecedor" required placeholder="contato@empresa.com.br" autocomplete="off" />
                 <div class="invalid-feedback">Informe um e-mail válido (ex.: nome@dominio.com).</div>
               </div>
 
               <div class="col-sm-6">
-                <label for="telefoneFornecedor" class="form-label">Telefone do Fornecedor *</label>
-                <input type="tel" class="form-control mono" id="telefoneFornecedor" name="telefoneFornecedor" required placeholder="(00) 00000-0000" autocomplete="off" />
+                <label for="input-telefone-fornecedor" class="form-label">Telefone do Fornecedor *</label>
+                <input type="tel" class="form-control mono" id="input-telefone-fornecedor" name="telefoneFornecedor" required placeholder="(00) 00000-0000" autocomplete="off" />
                 <div class="invalid-feedback">Informe um telefone no formato (00) 00000-0000.</div>
               </div>
 
               <div class="col-12">
-                <label for="descricao" class="form-label">Descrição</label>
-                <textarea class="form-control" id="descricao" name="descricao" rows="3" maxlength="200" placeholder="Detalhes do produto (até 200 caracteres)..."></textarea>
-                <div class="contador-caracteres text-end mt-1"><span id="contadorDescricao">0</span>/200</div>
+                <label for="textarea-descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="textarea-descricao" name="descricao" rows="3" maxlength="200" placeholder="Detalhes do produto (até 200 caracteres)..."></textarea>
+                <div class="contador-caracteres text-end mt-1"><span id="span-contador-descricao">0</span>/200</div>
               </div>
             </div>
 
             <div class="d-flex justify-content-end gap-2 border-top border-soft pt-3 mt-4">
               <a href="../../index.html" class="btn btn-outline-secondary btn-sm">Cancelar</a>
               <button type="submit" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
-                <span class="material-symbols-outlined icon-sm">save</span>
+                <span aria-hidden="true" class="material-symbols-outlined icon-sm">save</span>
                 Salvar Produto
               </button>
             </div>
@@ -142,13 +139,13 @@
     </div>
   </main>
 
-  <div class="app-toast" id="toast" role="status">
-    <span class="material-symbols-outlined toast-icon" id="toastIcon">check_circle</span>
-    <span id="toastMsg">Operação realizada.</span>
+  <div class="app-toast" id="div-toast" role="status">
+    <span aria-hidden="true" class="material-symbols-outlined toast-icon" id="span-toast-icone">check_circle</span>
+    <span id="span-toast-msg">Operação realizada.</span>
   </div>
 
   <!-- Rodapé compartilhado (../../footer.html), injetado pelo util/shell.js -->
-  <div id="appFooter"></div>
+  <div id="div-app-footer"></div>
 
   <script src="../../../assets/libraries/jquery/jquery.min.js"></script>
   <script src="../../../assets/libraries/bootstrap/bootstrap.bundle.min.js"></script>

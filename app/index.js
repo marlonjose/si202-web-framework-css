@@ -19,7 +19,7 @@ $(async function () {
   }
 
   function montarFiltroCategorias() {
-    const $filtro = $('#filtroCategoria');
+    const $filtro = $('#select-filtro-categoria');
     const selecionado = $filtro.val() || '';
     const categorias = {};
     $.each(produtos, function (i, p) {
@@ -39,16 +39,16 @@ $(async function () {
     $.each(produtos, function (i, p) {
       contagem[statusEstoque(p.estoque)]++;
     });
-    $('#statTotal').text(produtos.length);
-    $('#statOk').text(contagem.ok);
-    $('#statBaixo').text(contagem.baixo);
-    $('#statEsgotado').text(contagem.esgotado);
+    $('#div-stat-total').text(produtos.length);
+    $('#div-stat-ok').text(contagem.ok);
+    $('#div-stat-baixo').text(contagem.baixo);
+    $('#div-stat-esgotado').text(contagem.esgotado);
   }
 
   // ----- tabela de produtos -----
   function produtosFiltrados() {
-    const termo = $('#campoBusca').val().trim().toLowerCase();
-    const categoria = $('#filtroCategoria').val();
+    const termo = $('#input-busca').val().trim().toLowerCase();
+    const categoria = $('#select-filtro-categoria').val();
 
     return produtos.filter(function (p) {
       const slug = p.categoriaSlug || slugify(p.categoria);
@@ -65,12 +65,12 @@ $(async function () {
   function renderizar() {
     renderizarEstatisticas();
     const lista = produtosFiltrados();
-    const $corpo = $('#corpoTabela').empty();
+    const $corpo = $('#tbody-produtos').empty();
 
     if (lista.length === 0) {
       $corpo.append(
         '<tr><td colspan="6" class="estado-vazio">' +
-          '<span class="material-symbols-outlined icon-lg text-borda">inventory_2</span>' +
+          '<span aria-hidden="true" class="material-symbols-outlined icon-lg text-borda">inventory_2</span>' +
           '<p class="mb-0 mt-2">Nenhum produto encontrado.</p></td></tr>'
       );
     }
@@ -118,41 +118,45 @@ $(async function () {
         '    <a class="btn btn-sm btn-outline-primary py-1" href="pages/produto/index.html?id=' +
         encodeURIComponent(p.id) +
         '" title="Editar produto">' +
-        '      <span class="material-symbols-outlined icon-xs">edit</span> Editar</a> ' +
-        '    <button type="button" class="btn btn-sm btn-outline-danger py-1 btn-excluir" title="Excluir produto">' +
-        '      <span class="material-symbols-outlined icon-xs">delete</span></button>' +
+        '      <span aria-hidden="true" class="material-symbols-outlined icon-xs">edit</span> Editar</a> ' +
+        '    <button type="button" class="btn btn-sm btn-outline-danger py-1 btn-excluir" title="Excluir produto" aria-label="Excluir produto">' +
+        '      <span aria-hidden="true" class="material-symbols-outlined icon-xs">delete</span></button>' +
         '  </td>' +
         '</tr>';
       $corpo.append(linha);
     });
 
     // Contadores
-    $('#contagemVisivel').text(lista.length);
-    $('#contagemTotal').text(produtos.length);
-    $('#textoContador').text(
+    $('#strong-contagem-visivel').text(lista.length);
+    $('#strong-contagem-total').text(produtos.length);
+    $('#span-texto-contador').text(
       lista.length + (lista.length === 1 ? ' produto exibido' : ' produtos exibidos')
     );
-    $('#origemDados').text(Repositorio.modoLocal ? 'dados: web storage' : 'dados: json server');
+    $('#span-origem-dados').text(
+      Repositorio.modoLocal ? 'dados: web storage' : 'dados: json server'
+    );
   }
 
   // ----- eventos -----
-  $('#campoBusca').on('input', renderizar);
-  $('#filtroCategoria').on('change', renderizar);
+  $('#input-busca').on('input', renderizar);
+  $('#select-filtro-categoria').on('change', renderizar);
 
   // Excluir: abre modal de confirmação do Bootstrap (ID 04)
-  $('#corpoTabela').on('click', '.btn-excluir', function () {
+  $('#tbody-produtos').on('click', '.btn-excluir', function () {
     const id = $(this).closest('tr').data('id');
     produtoParaExcluir = produtos.find(function (p) {
       return String(p.id) === String(id);
     });
     if (!produtoParaExcluir) return;
-    $('#nomeExcluir').text(produtoParaExcluir.nome);
-    $('#skuExcluir').text(produtoParaExcluir.sku || '');
-    modalExcluir = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalExcluir'));
+    $('#strong-nome-excluir').text(produtoParaExcluir.nome);
+    $('#p-sku-excluir').text(produtoParaExcluir.sku || '');
+    modalExcluir = bootstrap.Modal.getOrCreateInstance(
+      document.getElementById('div-modal-excluir')
+    );
     modalExcluir.show();
   });
 
-  $('#btnConfirmarExcluir').on('click', async function () {
+  $('#button-confirmar-excluir').on('click', async function () {
     if (!produtoParaExcluir) return;
     await Repositorio.excluirProduto(produtoParaExcluir.id);
     modalExcluir.hide();
@@ -162,7 +166,7 @@ $(async function () {
   });
 
   // Importar produtos reais da API pública (ID 24)
-  $('#btnImportar').on('click', async function () {
+  $('#button-importar').on('click', async function () {
     const $botao = $(this).prop('disabled', true);
     $botao.find('.rotulo-botao').text('Importando...');
     try {
@@ -195,6 +199,6 @@ $(async function () {
   await carregarTudo();
 
   if (categoriaInicial) {
-    $('#filtroCategoria').val(categoriaInicial).trigger('change');
+    $('#select-filtro-categoria').val(categoriaInicial).trigger('change');
   }
 });

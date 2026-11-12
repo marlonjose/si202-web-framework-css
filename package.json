@@ -21,8 +21,7 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "jquery": "^4.0.0",
-    "jquery-mask-plugin": "^1.14.16",
-    "uuid": "^14.0.2"
+    "jquery-mask-plugin": "^1.14.16"
   },
   "devDependencies": {
     "eslint": "^9.39.5",

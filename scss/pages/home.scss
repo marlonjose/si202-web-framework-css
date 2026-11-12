@@ -2,7 +2,6 @@
 // EstoqueFácil — estilos da página inicial / Produtos (app/index.html)
 // Compila para app/index.css com: npm run sass
 // =====================================================================
-@use 'sass:list';
 @use '../variables' as *;
 @use '../functions' as *;
 @use '../mixins' as *;
@@ -109,9 +108,7 @@
   border-radius: $radius-lg;
   overflow: hidden;
   background: $surface-container;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include centralizar-flex;
   color: $primary;
   flex-shrink: 0;
 
@@ -123,57 +120,22 @@
   }
 }
 
-// ----------------------------- Badges de status -----------------------------
-// Mapa de status → cores (gera as classes .badge-estoque-*)
-$status-cores: (
-  'ok': (
-    #ecfdf5,
-    #065f46,
-    $success,
-  ),
-  'baixo': (
-    #fffbeb,
-    #92400e,
-    $warning,
-  ),
-  'esgotado': (
-    #fef2f2,
-    #991b1b,
-    $danger,
-  ),
-  'inativo': (
-    $surface-low,
-    $text-muted,
-    $outline,
-  ),
-);
+// ----------------------------- Selos de estoque -----------------------------
+// Mesmo formato para os 4 status; só as cores mudam (mixin badge-estoque)
+.badge-estoque-ok {
+  @include badge-estoque($success-bg, #065f46, $success);
+}
 
-@each $nome, $cores in $status-cores {
-  $bg: list.nth($cores, 1);
-  $fg: list.nth($cores, 2);
-  $dot: list.nth($cores, 3);
+.badge-estoque-baixo {
+  @include badge-estoque($warning-bg, #92400e, $warning);
+}
 
-  .badge-estoque-#{$nome} {
-    display: inline-flex;
-    align-items: center;
-    gap: rem(6);
-    background: $bg;
-    color: $fg;
-    border: 1px solid rgba($dot, 0.35);
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: rem(2) rem(10);
-    font-family: $font-mono;
+.badge-estoque-esgotado {
+  @include badge-estoque($danger-bg, #991b1b, $danger);
+}
 
-    &::before {
-      content: '';
-      width: rem(6);
-      height: rem(6);
-      border-radius: 50%;
-      background: $dot;
-    }
-  }
+.badge-estoque-inativo {
+  @include badge-estoque($surface-low, $text-muted, $outline);
 }
 
 // ----------------------------- Estado vazio / modal -----------------------------
@@ -183,29 +145,10 @@ $status-cores: (
   color: $text-muted;
 }
 
-// Modal: botão destrutivo
-.btn-danger-soft {
-  background: #fee2e2;
-  border: 1px solid #fecaca;
-  color: $danger;
-
-  &:hover {
-    background: $danger;
-    border-color: $danger;
-    color: $white;
-  }
-}
-
 // ----------------------------- Barra de busca -----------------------------
 .busca-wrapper {
   min-width: rem(220);
   max-width: rem(340);
-}
-
-.busca-icone {
-  font-size: $icon-sm;
-  left: rem(10);
-  top: rem(9);
 }
 
 // Indicador (bolinha) do contador de produtos

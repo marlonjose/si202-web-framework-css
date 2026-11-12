@@ -34,8 +34,7 @@ function gerarSKU() {
   return 'SKU-' + parteLetras + '-' + parteNumeros;
 }
 
-// Gera identificador único (biblioteca uuid quando disponível, com fallback nativo)
+// Gera identificador único no modo local (API nativa do navegador)
 function gerarId() {
-  if (window.uuid && typeof window.uuid.v4 === 'function') return window.uuid.v4();
-  return window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now();
+  return crypto.randomUUID();
 }

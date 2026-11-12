@@ -11,7 +11,6 @@ $primary-deep: #2a14b4; // marca (logotipo)
 $success: #059669; // emerald — estoque OK
 $warning: #d97706; // amber — estoque baixo
 $danger: #dc2626; // red — esgotado / destrutivo
-$danger-hover: #93000a;
 $text: #131b2e; // on-surface
 $text-muted: #464554; // on-surface-variant
 $outline: #777586;
@@ -44,7 +43,6 @@ $font-mono: 'JetBrains Mono', ui-monospace, monospace;
 // Raios e sombras (nível 1 do design system)
 $radius-sm: 0.25rem;
 $radius-lg: 0.5rem;
-$radius-xl: 0.75rem;
 $shadow-1:
   0 1px 3px 0 rgba(15, 23, 42, 0.08),
   0 1px 2px -1px rgba(15, 23, 42, 0.08);

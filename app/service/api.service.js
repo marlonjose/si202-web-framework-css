@@ -173,11 +173,4 @@ const ApiPublica = {
       };
     });
   },
-
-  // Lista de categorias reais da DummyJSON
-  async categorias() {
-    const resposta = await fetchTimeout(`${APP.apiPublica}/products/category-list`, {}, 6000);
-    if (!resposta.ok) throw new Error('DummyJSON respondeu ' + resposta.status);
-    return await resposta.json(); // array de slugs
-  },
 };

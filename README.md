@@ -19,7 +19,7 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 - 🎨 [Design System](docs/design-tokens.md) - Identidade visual (tokens SCSS aplicados ao Bootstrap).
 - 🖼️ Prototipação (Google Stitch) - Protótipo navegável mobile e desktop: <https://stitch.withgoogle.com/projects/17953296490233439770>
   - Cópia local das telas geradas: [code.html](docs/prototipo/code.html) + [screen.png](docs/prototipo/screen.png).
-- 🌐 Site em Produção - GitHub Pages: <https://marlonjose.github.io/si202-web-framework-css/>
+- 🌐 Site em Produção - GitHub Pages: a partir da Entrega 3
 
 ## 🧭 Justificativa das escolhas técnicas
 
@@ -32,7 +32,6 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 - JavaScript:
   - **JQuery** - Para realizar animações e manipulação do DOM.
   - **jQuery Mask Plugin** - Máscaras de moeda e telefone nos formulários.
-  - **uuid** - Identificadores únicos no modo local (Web Storage).
   - **JSON Server** - Para simular uma API REST.
 - Ferramentas: **ESLint** + **Prettier** (qualidade e padronização do código) e **gh-pages** (deploy).
 
@@ -50,8 +49,8 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 - [x] ID 06 - Aplica um Design System consistente (cores, tipografia, padrões de componentes) em toda a aplicação. → Tokens SCSS aplicados ao Bootstrap em todas as páginas
 - [x] ID 07 - Utiliza Sass (SCSS) com ou sem framework, aplicando variáveis, mixins e funções para modularizar o código. → Sass modular com `@use`: `scss/_variables.scss` (tokens), `_functions.scss` (`@function rem()`), `_mixins.scss` (`card-surface`, `focus-ring`, `centralizar-flex`, reaproveitados em várias páginas), `_base`, `_layout`, `_components` reunidos no `main.scss` + um SCSS por página em `scss/pages/`; mapa `$status-cores` + `@each`
 - [x] ID 08 - Aplica tipografia responsiva (media queries mobile first) ou tipografia fluida (função clamp() + unidades relativas). → Tipografia fluida com `clamp()` (`.page-title`)
-- [x] ID 09 - Aplica técnicas de responsividade de imagens usando CSS (object-fit, containers com unidades relativas). → `object-fit: cover` nas miniaturas da tabela
-- [x] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary). → WebP + `srcset` 1x/2x (`assets/resources/images/placeholder-*.webp`)
+- [x] ID 09 - Aplica técnicas de responsividade de imagens usando CSS (object-fit, containers com unidades relativas). → `object-fit: cover` nas miniaturas da tabela (`.thumb`, `scss/pages/home.scss`) e nas capas das categorias, cujo container `.cat-capa` usa `aspect-ratio: 16 / 9` (`scss/pages/categorias.scss`)
+- [x] ID 10 - Otimiza imagens usando formatos modernos (WebP) e carregamento adaptativo (srcset, picture, ou parâmetros do Cloudinary). → imagens entregues pelo **Cloudinary** (`UI.urlCloudinary` em `app/util/ui.js`) com `f_webp,q_auto` e `c_fill`: miniaturas da tabela com `srcset` 1x/2x (36/72px) e capas das categorias com `srcset` 400w/800w/1200w + `sizes` (`app/pages/categorias/categorias.js`); fotos próprias via *upload* (pasta `estoquefacil/`) e fotos da DummyJSON via *fetch*; placeholder local em WebP para produtos sem foto
 
 **RA2 - Realizar tratamento de formulários e aplicar validações customizadas no lado cliente.**
 
@@ -78,6 +77,41 @@ Para entender as regras de negócio, o escopo e a arquitetura técnica da aplica
 - [x] ID 22 - Realiza requisições assíncronas para uma API fake (ex.: JSON Server) para persistir dados de um formulário. → `fetch`/`async-await` com `POST`/`PUT /produtos`
 - [x] ID 23 - Realiza requisições assíncronas para uma API fake para exibir dados na página. → `fetch`/`async-await` com `GET /produtos` na tabela
 - [x] ID 24 - Realiza requisições assíncronas para APIs públicas reais (OpenWeather, ViaCEP etc.), exibindo os dados e tratando erros. → **DummyJSON** (`/products`) no botão "Importar da API pública": exibição dos dados importados e tratamento de erros (timeout + toast)
+
+## 📁 Estrutura de pastas
+
+```
+.
+├── app/                         # Aplicação (frontend)
+│   ├── index.html               # Página Produtos: tabela, busca, filtro, estatísticas, exclusão, importação
+│   ├── index.js / index.css     # Lógica e estilos da página Produtos
+│   ├── style.css                # CSS global (compilado de scss/main.scss)
+│   ├── menu.html / footer.html  # Menu e rodapé compartilhados (injetados por util/shell.js)
+│   ├── config.js                # Endpoints, chaves do Web Storage, Cloudinary e categorias padrão
+│   ├── model/produto.js         # Regras do produto: Regex, status do estoque, SKU, id
+│   ├── service/api.service.js   # JSON Server + fallback Web Storage (Repositorio) e DummyJSON (ApiPublica)
+│   ├── util/                    # formatter.js, ui.js (toast, Cloudinary, miniaturas), shell.js
+│   └── pages/
+│       ├── produto/             # Cadastro/edição: index.html + produto.js + produto.css
+│       └── categorias/          # Cards de categorias: index.html + categorias.js + categorias.css
+├── assets/
+│   ├── libraries/               # Bootstrap, jQuery e jQuery Mask (copiados do node_modules, não versionado)
+│   └── resources/images/        # Placeholders WebP para produtos sem foto
+├── scss/                        # Design System em Sass
+│   ├── _variables.scss          # Tokens (cores, tipografia, raios, espaçamentos)
+│   ├── _functions.scss          # @function rem()
+│   ├── _mixins.scss             # card-surface, focus-ring, centralizar-flex
+│   ├── _base / _layout / _components.scss
+│   ├── main.scss                # Junta os módulos → app/style.css
+│   └── pages/                   # Um SCSS por página → CSS da página
+├── db/db.json                   # Banco do JSON Server (produtos e categorias)
+├── scripts/                     # copy-libs.js (node_modules → assets/libraries) e build-dist.js (deploy)
+├── docs/                        # PRD, especificação, arquitetura, design tokens, protótipo e telas
+├── eslint.config.mjs / .prettierrc
+└── package.json
+```
+
+> As imagens dos produtos e das categorias não ficam no repositório: estão no **Cloudinary** (pasta `estoquefacil/` da conta) e o `db.json`/`config.js` guardam só a referência (Public ID ou URL).
 
 ## 🚀 Manual de execução
 

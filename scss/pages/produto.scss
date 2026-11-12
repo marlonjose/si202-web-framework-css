@@ -12,12 +12,3 @@
   color: $outline;
   font-family: $font-mono;
 }
-
-// Campo SKU + botão "gerar" lado a lado (antes inline no HTML)
-.btn-gerar-sku {
-  width: rem(44);
-}
-
-.input-sku {
-  max-width: calc(100% - #{rem(44)});
-}

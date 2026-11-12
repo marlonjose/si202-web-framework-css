@@ -11,15 +11,12 @@
   <link href="../assets/libraries/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="style.css" rel="stylesheet" />
   <link href="index.css" rel="stylesheet" />
-  <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; line-height: 1; display: inline-block; vertical-align: middle; }
-  </style>
 </head>
 <!-- data-base: prefixo para menu/footer; data-pagina: link ativo no menu -->
 <body class="d-flex flex-column min-vh-100" data-base="" data-pagina="produtos">
 
   <!-- Menu compartilhado (app/menu.html), injetado pelo util/shell.js -->
-  <div id="appMenu"></div>
+  <div id="div-app-menu"></div>
 
   <main class="container-xl py-4 flex-grow-1">
     <!-- Cabeçalho da página -->
@@ -29,12 +26,12 @@
         <p class="text-muted-app small mb-0">Gerencie o catálogo com cadastro, edição, exclusão e importação de dados reais.</p>
       </div>
       <div class="d-flex gap-2 flex-shrink-0 flex-wrap">
-        <button type="button" id="btnImportar" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1">
-          <span class="material-symbols-outlined icon-sm">cloud_download</span>
+        <button type="button" id="button-importar" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1">
+          <span aria-hidden="true" class="material-symbols-outlined icon-sm">cloud_download</span>
           <span class="rotulo-botao">Importar da API pública</span>
         </button>
         <a href="pages/produto/index.html" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
-          <span class="material-symbols-outlined icon-sm">add</span>
+          <span aria-hidden="true" class="material-symbols-outlined icon-sm">add</span>
           Novo Produto
         </a>
       </div>
@@ -43,41 +40,41 @@
     <!-- Cartões de estatística (CSS Grid puro, sem classes do Bootstrap) -->
     <section class="stat-grid mb-4" aria-label="Resumo do estoque">
       <div class="stat-card">
-        <div class="stat-icon stat-icon--total"><span class="material-symbols-outlined">inventory_2</span></div>
-        <div><div class="stat-value" id="statTotal">–</div><div class="stat-label">Total de produtos</div></div>
+        <div class="stat-icon stat-icon--total"><span aria-hidden="true" class="material-symbols-outlined">inventory_2</span></div>
+        <div><div class="stat-value" id="div-stat-total">–</div><div class="stat-label">Total de produtos</div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon stat-icon--ok"><span class="material-symbols-outlined">check_circle</span></div>
-        <div><div class="stat-value" id="statOk">–</div><div class="stat-label">Em estoque</div></div>
+        <div class="stat-icon stat-icon--ok"><span aria-hidden="true" class="material-symbols-outlined">check_circle</span></div>
+        <div><div class="stat-value" id="div-stat-ok">–</div><div class="stat-label">Em estoque</div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon stat-icon--baixo"><span class="material-symbols-outlined">warning</span></div>
-        <div><div class="stat-value" id="statBaixo">–</div><div class="stat-label">Estoque baixo</div></div>
+        <div class="stat-icon stat-icon--baixo"><span aria-hidden="true" class="material-symbols-outlined">warning</span></div>
+        <div><div class="stat-value" id="div-stat-baixo">–</div><div class="stat-label">Estoque baixo</div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon stat-icon--esgotado"><span class="material-symbols-outlined">error</span></div>
-        <div><div class="stat-value" id="statEsgotado">–</div><div class="stat-label">Esgotados</div></div>
+        <div class="stat-icon stat-icon--esgotado"><span aria-hidden="true" class="material-symbols-outlined">error</span></div>
+        <div><div class="stat-value" id="div-stat-esgotado">–</div><div class="stat-label">Esgotados</div></div>
       </div>
     </section>
 
     <!-- Painel: barra de ferramentas + tabela (grid e table do Bootstrap) -->
     <div class="panel">
       <div class="p-3 d-flex flex-wrap gap-2 align-items-center border-bottom border-soft">
-        <div class="position-relative flex-grow-1 busca-wrapper">
-          <span class="material-symbols-outlined position-absolute text-muted-app busca-icone">search</span>
-          <input type="search" id="campoBusca" class="form-control ps-5" placeholder="Pesquisar por nome ou SKU..." aria-label="Pesquisar produtos" />
+        <div class="input-group flex-grow-1 busca-wrapper">
+          <span class="input-group-text"><span aria-hidden="true" class="material-symbols-outlined icon-sm text-muted-app">search</span></span>
+          <input type="search" id="input-busca" class="form-control" placeholder="Pesquisar por nome ou SKU..." aria-label="Pesquisar produtos" />
         </div>
-        <select id="filtroCategoria" class="form-select w-auto" aria-label="Filtrar por categoria">
+        <select id="select-filtro-categoria" class="form-select w-auto" aria-label="Filtrar por categoria">
           <option value="">Todas as categorias</option>
         </select>
         <span class="ms-auto small text-muted-app d-flex align-items-center gap-1">
           <span class="status-dot"></span>
-          <span id="textoContador">— produtos</span>
+          <span id="span-texto-contador">— produtos</span>
         </span>
       </div>
 
       <div class="table-responsive">
-        <table class="table table-app align-middle" id="tabelaProdutos">
+        <table class="table table-app align-middle" id="table-produtos">
           <thead>
             <tr>
               <th scope="col">Código/SKU</th>
@@ -88,53 +85,53 @@
               <th scope="col" class="text-end">Ações</th>
             </tr>
           </thead>
-          <tbody id="corpoTabela">
+          <tbody id="tbody-produtos">
             <tr><td colspan="6" class="text-center text-muted-app py-4">Carregando produtos...</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="px-3 py-2 border-top border-soft d-flex justify-content-between small text-muted-app">
-        <span>Mostrando <strong class="text-body" id="contagemVisivel">0</strong> de <strong class="text-body" id="contagemTotal">0</strong> itens</span>
-        <span class="mono" id="origemDados"></span>
+        <span>Mostrando <strong class="text-body" id="strong-contagem-visivel">0</strong> de <strong class="text-body" id="strong-contagem-total">0</strong> itens</span>
+        <span class="mono" id="span-origem-dados"></span>
       </div>
     </div>
   </main>
 
   <!-- Modal de confirmação de exclusão (componente JS do Bootstrap) -->
-  <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="tituloExcluir" aria-hidden="true">
+  <div class="modal fade" id="div-modal-excluir" tabindex="-1" aria-labelledby="h2-titulo-excluir" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header border-0 pb-0">
           <div class="d-flex align-items-center gap-3">
             <div class="d-flex align-items-center justify-content-center flex-shrink-0 modal-icone-perigo">
-              <span class="material-symbols-outlined">delete</span>
+              <span aria-hidden="true" class="material-symbols-outlined">delete</span>
             </div>
             <div>
-              <h2 class="modal-title fs-6 fw-bold" id="tituloExcluir">Excluir Produto</h2>
-              <p class="mono small text-muted-app mb-0" id="skuExcluir"></p>
+              <h2 class="modal-title fs-6 fw-bold" id="h2-titulo-excluir">Excluir Produto</h2>
+              <p class="mono small text-muted-app mb-0" id="p-sku-excluir"></p>
             </div>
           </div>
         </div>
         <div class="modal-body">
-          <p class="small mb-0">Tem certeza que deseja remover <strong id="nomeExcluir"></strong>? Esta ação não pode ser desfeita.</p>
+          <p class="small mb-0">Tem certeza que deseja remover <strong id="strong-nome-excluir"></strong>? Esta ação não pode ser desfeita.</p>
         </div>
         <div class="modal-footer border-0 pt-0">
           <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-sm btn-danger" id="btnConfirmarExcluir">Sim, excluir</button>
+          <button type="button" class="btn btn-sm btn-danger" id="button-confirmar-excluir">Sim, excluir</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Toast de notificação (animado com jQuery) -->
-  <div class="app-toast" id="toast" role="status">
-    <span class="material-symbols-outlined toast-icon" id="toastIcon">check_circle</span>
-    <span id="toastMsg">Operação realizada.</span>
+  <div class="app-toast" id="div-toast" role="status">
+    <span aria-hidden="true" class="material-symbols-outlined toast-icon" id="span-toast-icone">check_circle</span>
+    <span id="span-toast-msg">Operação realizada.</span>
   </div>
 
   <!-- Rodapé compartilhado (app/footer.html), injetado pelo util/shell.js -->
-  <div id="appFooter"></div>
+  <div id="div-app-footer"></div>
 
   <script src="../assets/libraries/jquery/jquery.min.js"></script>
   <script src="../assets/libraries/bootstrap/bootstrap.bundle.min.js"></script>

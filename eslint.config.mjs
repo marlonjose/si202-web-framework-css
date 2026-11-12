@@ -14,7 +14,6 @@ export default [
         $: 'readonly',
         jQuery: 'readonly',
         bootstrap: 'readonly',
-        uuid: 'readonly',
         // APIs do navegador
         window: 'readonly',
         document: 'readonly',

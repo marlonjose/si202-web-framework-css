@@ -47,14 +47,14 @@ bibliotecas em `assets/libraries` e recursos em `assets/resources`):
 │   ├── index.js / index.css    # Lógica e estilos da listagem (compilado de scss/pages/home.scss)
 │   ├── style.css               # CSS global compilado (commitado) a partir do SCSS
 │   ├── menu.html / footer.html # Partiais compartilhadas (injetadas pelo util/shell.js)
-│   ├── config.js               # Endpoints e chaves de armazenamento
+│   ├── config.js               # Endpoints, chaves de armazenamento, Cloudinary e categorias padrão (com capa)
 │   ├── model/
 │   │   └── produto.js          # Entidade Produto: Regex, status do estoque, SKU, id
 │   ├── service/
 │   │   └── api.service.js      # fetchTimeout, WebStorage, Repositorio, ApiPublica
 │   ├── util/
 │   │   ├── formatter.js        # formatarBRL, parsePrecoBR, slugify, capitalizar, escaparHTML
-│   │   ├── ui.js               # Toast (jQuery), miniaturas, selo de modo local
+│   │   ├── ui.js               # Toast (jQuery), URLs do Cloudinary, miniaturas, selo de modo local
 │   │   └── shell.js            # Injeção do menu/rodapé + link ativo
 │   └── pages/
 │       ├── produto/            # index.html + produto.js + produto.css (formulário/edição)
@@ -83,7 +83,7 @@ Definidos em `scss/_variables.scss` (fonte de verdade visual: [`design-tokens.md
 | `$surface` família | `#faf8ff` … `#e2e7ff` | Fundos e cartões |
 | `$font-ui` | Inter | Interface geral |
 | `$font-mono` | JetBrains Mono | SKU, preços, contagens (alinhamento tabular) |
-| `$radius-*` | 4/8/12px | Controles / cartões / modais |
+| `$radius-*` | 4/8px | Controles / cartões |
 | `@function rem($px)` | — | Conversão px→rem (unidades relativas) |
 | `clamp()` | `.page-title` | Tipografia fluida |
 
@@ -97,7 +97,7 @@ própria. O mapa `$status-cores` + `@each` gera as classes `.badge-estoque-*`.
 
 | Campo | Tipo | Observações |
 | --- | --- | --- |
-| `id` | number \| string | Atribuído pela API fake ou `uuid`/`crypto` no modo local |
+| `id` | number \| string | Atribuído pela API fake ou `crypto.randomUUID()` no modo local |
 | `sku` | string | `SKU-XX-0000` (Regex validado) |
 | `nome` | string | Obrigatório, 3–80 caracteres |
 | `marca` | string | Opcional |

@@ -12,13 +12,23 @@
 .card-categoria {
   @include card-surface;
   position: relative;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-1;
+  // Capa da categoria (ID 09)
+  // O container tem proporção fixa (aspect-ratio, unidade relativa à largura do
+  // card) e o object-fit: cover faz a foto preencher o espaço cortando o excesso,
+  // sem distorcer, qualquer que seja o tamanho original da imagem
+  .cat-capa {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: $radius-lg $radius-lg 0 0;
+    background: $surface-container;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
   }
 
   .cat-icon {

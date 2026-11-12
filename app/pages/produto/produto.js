@@ -11,7 +11,7 @@ $(async function () {
   // ----- categorias (select) -----
   const categorias = await Repositorio.listarCategorias();
   $.each(categorias, function (i, cat) {
-    $('#categoria').append($('<option>', { value: cat.nome, text: cat.nome }));
+    $('#select-categoria').append($('<option>', { value: cat.nome, text: cat.nome }));
   });
 
   // ----- modo edição (?id=) -----
@@ -19,25 +19,25 @@ $(async function () {
   if (id) {
     produtoEmEdicao = await Repositorio.buscarProduto(id);
     if (produtoEmEdicao) {
-      $('#formTitulo').text('Editar Produto');
-      $('#breadcrumbAtual').text('Editar');
-      $('#formSubtitulo').text('Altere os campos desejados. Os marcados com * são obrigatórios.');
-      $('#nome').val(produtoEmEdicao.nome);
-      $('#sku').val(produtoEmEdicao.sku).prop('readonly', true);
-      $('#categoria').val(produtoEmEdicao.categoria);
-      $('#marca').val(produtoEmEdicao.marca || '');
-      $('#preco').val(formatarInputPreco(produtoEmEdicao.preco));
-      $('#estoque').val(produtoEmEdicao.estoque);
+      $('#h1-form-titulo').text('Editar Produto');
+      $('#li-breadcrumb-atual').text('Editar');
+      $('#p-form-subtitulo').text(
+        'Altere os campos desejados. Os marcados com * são obrigatórios.'
+      );
+      $('#input-nome').val(produtoEmEdicao.nome);
+      $('#input-sku').val(produtoEmEdicao.sku).prop('readonly', true);
+      $('#select-categoria').val(produtoEmEdicao.categoria);
+      $('#input-marca').val(produtoEmEdicao.marca || '');
+      $('#input-preco').val(formatarInputPreco(produtoEmEdicao.preco));
+      $('#input-estoque').val(produtoEmEdicao.estoque);
       $('input[name="situacao"][value="' + produtoEmEdicao.situacao + '"]').prop('checked', true);
-      $('#destaque').prop('checked', !!produtoEmEdicao.destaque);
-      $('#emailFornecedor').val(produtoEmEdicao.emailFornecedor || '');
-      $('#telefoneFornecedor').val(produtoEmEdicao.telefoneFornecedor || '');
-      $('#descricao')
-        .val(produtoEmEdicao.descricao || '')
-        .trigger('input');
+      $('#input-destaque').prop('checked', !!produtoEmEdicao.destaque);
+      $('#input-email-fornecedor').val(produtoEmEdicao.emailFornecedor || '');
+      $('#input-telefone-fornecedor').val(produtoEmEdicao.telefoneFornecedor || '');
+      $('#textarea-descricao').val(produtoEmEdicao.descricao || '');
     }
   } else {
-    $('#sku').val(gerarSKU());
+    $('#input-sku').val(gerarSKU());
   }
 
   // Número vindo do banco (489.9) para o formato mascarado (489,90)
@@ -46,17 +46,20 @@ $(async function () {
   }
 
   // ----- máscaras (plugin jQuery Mask) -----
-  $('#preco').mask('#.##0,00', { reverse: true });
-  $('#telefoneFornecedor').mask('(00) 00000-0000');
+  $('#input-preco').mask('#.##0,00', { reverse: true });
+  $('#input-telefone-fornecedor').mask('(00) 00000-0000');
 
   // ----- utilidades de tela -----
-  $('#btnGerarSku').on('click', function () {
-    $('#sku').val(gerarSKU()).trigger('input');
+  $('#button-gerar-sku').on('click', function () {
+    $('#input-sku').val(gerarSKU()).trigger('input');
   });
 
-  $('#descricao').on('input', function () {
-    $('#contadorDescricao').text(this.value.length);
-  });
+  // trigger: atualiza o contador já com a descrição carregada na edição
+  $('#textarea-descricao')
+    .on('input', function () {
+      $('#span-contador-descricao').text(this.value.length);
+    })
+    .trigger('input');
 
   // Valida um campo e aplica o estado visual do Bootstrap (is-invalid/is-valid)
   function validarCampo($campo, valido) {
@@ -69,36 +72,39 @@ $(async function () {
     let formularioOk = true;
 
     // Nome: obrigatório e tamanho mínimo (validação nativa — ID 11)
-    formularioOk = validarCampo($('#nome'), $('#nome')[0].checkValidity()) && formularioOk;
+    formularioOk =
+      validarCampo($('#input-nome'), $('#input-nome')[0].checkValidity()) && formularioOk;
 
     // SKU: Regex próprio
-    const skuOk = REGEX.sku.test($('#sku').val().trim().toUpperCase());
-    formularioOk = validarCampo($('#sku'), skuOk) && formularioOk;
+    const skuOk = REGEX.sku.test($('#input-sku').val().trim().toUpperCase());
+    formularioOk = validarCampo($('#input-sku'), skuOk) && formularioOk;
 
     // Categoria: obrigatório (select)
-    formularioOk = validarCampo($('#categoria'), !!$('#categoria').val()) && formularioOk;
+    formularioOk =
+      validarCampo($('#select-categoria'), !!$('#select-categoria').val()) && formularioOk;
 
     // Preço: máscara + Regex de moeda brasileira
-    const precoOk = REGEX.preco.test($('#preco').val().trim());
-    formularioOk = validarCampo($('#preco'), precoOk) && formularioOk;
+    const precoOk = REGEX.preco.test($('#input-preco').val().trim());
+    formularioOk = validarCampo($('#input-preco'), precoOk) && formularioOk;
 
     // Estoque: nativo (min 0, max 99999)
-    formularioOk = validarCampo($('#estoque'), $('#estoque')[0].checkValidity()) && formularioOk;
+    formularioOk =
+      validarCampo($('#input-estoque'), $('#input-estoque')[0].checkValidity()) && formularioOk;
 
     // E-mail: tipo nativo + Regex
-    const email = $('#emailFornecedor').val().trim();
+    const email = $('#input-email-fornecedor').val().trim();
     const emailOk = REGEX.email.test(email);
-    formularioOk = validarCampo($('#emailFornecedor'), emailOk) && formularioOk;
+    formularioOk = validarCampo($('#input-email-fornecedor'), emailOk) && formularioOk;
 
     // Telefone: máscara + Regex
-    const telefoneOk = REGEX.telefone.test($('#telefoneFornecedor').val().trim());
-    formularioOk = validarCampo($('#telefoneFornecedor'), telefoneOk) && formularioOk;
+    const telefoneOk = REGEX.telefone.test($('#input-telefone-fornecedor').val().trim());
+    formularioOk = validarCampo($('#input-telefone-fornecedor'), telefoneOk) && formularioOk;
 
     return formularioOk;
   }
 
   // Remove o estado de erro assim que o usuário corrige o campo
-  $('#formProduto input, #formProduto select, #formProduto textarea').on(
+  $('#form-produto input, #form-produto select, #form-produto textarea').on(
     'input change',
     function () {
       $(this).removeClass('is-invalid is-valid');
@@ -106,9 +112,9 @@ $(async function () {
   );
 
   // ----- envio -----
-  $('#formProduto').on('submit', async function (evento) {
+  $('#form-produto').on('submit', async function (evento) {
     evento.preventDefault();
-    $('#sku').val($('#sku').val().trim().toUpperCase());
+    $('#input-sku').val($('#input-sku').val().trim().toUpperCase());
 
     if (!validarFormulario()) {
       UI.toast('Verifique os campos destacados em vermelho.', 'alerta');
@@ -117,22 +123,22 @@ $(async function () {
     }
 
     const botaoSalvar = $(this).find('button[type="submit"]').prop('disabled', true);
-    const categoria = $('#categoria').val();
+    const categoria = $('#select-categoria').val();
 
     const produto = {
       id: produtoEmEdicao ? produtoEmEdicao.id : undefined,
-      sku: $('#sku').val(),
-      nome: $('#nome').val().trim(),
-      marca: $('#marca').val().trim(),
+      sku: $('#input-sku').val(),
+      nome: $('#input-nome').val().trim(),
+      marca: $('#input-marca').val().trim(),
       categoria: categoria,
       categoriaSlug: slugify(categoria),
-      preco: parsePrecoBR($('#preco').val()),
-      estoque: parseInt($('#estoque').val(), 10) || 0,
+      preco: parsePrecoBR($('#input-preco').val()),
+      estoque: parseInt($('#input-estoque').val(), 10) || 0,
       situacao: $('input[name="situacao"]:checked').val(),
-      destaque: $('#destaque').is(':checked'),
-      emailFornecedor: $('#emailFornecedor').val().trim(),
-      telefoneFornecedor: $('#telefoneFornecedor').val().trim(),
-      descricao: $('#descricao').val().trim(),
+      destaque: $('#input-destaque').is(':checked'),
+      emailFornecedor: $('#input-email-fornecedor').val().trim(),
+      telefoneFornecedor: $('#input-telefone-fornecedor').val().trim(),
+      descricao: $('#textarea-descricao').val().trim(),
       imagem: produtoEmEdicao ? produtoEmEdicao.imagem || '' : '',
       origem: produtoEmEdicao ? produtoEmEdicao.origem || 'manual' : 'manual',
     };

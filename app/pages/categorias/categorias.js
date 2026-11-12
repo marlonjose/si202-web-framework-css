@@ -7,7 +7,7 @@ $(async function () {
   await Repositorio.verificarApiFake();
   UI.atualizarBadgeModo(Repositorio.modoLocal);
 
-  const $grade = $('#gradeCategorias').empty();
+  const $grade = $('#div-grade-categorias').empty();
 
   // Produtos do catálogo (JSON Server com fallback para Web Storage)
   const produtos = await Repositorio.listarProdutos();
@@ -49,9 +49,33 @@ $(async function () {
       const $card = $('<div>', { class: 'card card-categoria h-100' });
       const $corpo = $('<div>', { class: 'card-body p-3' });
 
+      // Capa da categoria vinda do Cloudinary (ID 09/10)
+      // srcset com 3 larguras + sizes: o navegador calcula quanto espaço o card
+      // ocupa (1 coluna no celular até 4 no desktop) e baixa só a versão mais próxima
+      const padrao = CATEGORIAS_PADRAO.find(function (c) {
+        return c.slug === slug;
+      });
+      if (padrao && padrao.capa) {
+        const url = (largura) =>
+          UI.urlCloudinary(padrao.capa, `w_${largura},ar_16:9,c_fill,f_webp,q_auto`);
+        const $capa = $('<div>', { class: 'cat-capa' }).append(
+          $('<img>', {
+            src: url(400),
+            srcset: `${url(400)} 400w, ${url(800)} 800w, ${url(1200)} 1200w`,
+            sizes:
+              '(min-width: 1200px) 25vw, (min-width: 768px) 33vw, (min-width: 576px) 50vw, 100vw',
+            alt: 'Foto ilustrativa da categoria ' + cat.nome,
+            width: 400,
+            height: 225,
+            loading: 'lazy',
+          })
+        );
+        $card.append($capa);
+      }
+
       const $cabecalho = $('<div>', { class: 'd-flex align-items-center gap-3 mb-2' });
       const $icone = $('<div>', { class: 'cat-icon' }).append(
-        $('<span>', { class: 'material-symbols-outlined' }).text(cat.icone)
+        $('<span>', { class: 'material-symbols-outlined', 'aria-hidden': 'true' }).text(cat.icone)
       );
       const $titulo = $('<h2>', { class: 'card-title h6 fw-bold mb-0 flex-grow-1' }).text(cat.nome);
       $cabecalho.append($icone, $titulo);

@@ -11,15 +11,12 @@
   <link href="../../../assets/libraries/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="../../style.css" rel="stylesheet" />
   <link href="categorias.css" rel="stylesheet" />
-  <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; line-height: 1; display: inline-block; vertical-align: middle; }
-  </style>
 </head>
 <!-- data-base: prefixo para menu/footer; data-pagina: link ativo no menu -->
 <body class="d-flex flex-column min-vh-100" data-base="../../" data-pagina="categorias">
 
   <!-- Menu compartilhado (../../menu.html), injetado pelo util/shell.js -->
-  <div id="appMenu"></div>
+  <div id="div-app-menu"></div>
 
   <main class="container-xl py-4 flex-grow-1">
     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
@@ -30,18 +27,18 @@
     </div>
 
     <!-- Grade de cards (grid responsivo do Bootstrap: row-cols) -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3" id="gradeCategorias">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3" id="div-grade-categorias">
       <div class="col"><div class="card card-categoria"><div class="card-body p-3 text-center text-muted-app py-5">Carregando categorias...</div></div></div>
     </div>
   </main>
 
-  <div class="app-toast" id="toast" role="status">
-    <span class="material-symbols-outlined toast-icon" id="toastIcon">check_circle</span>
-    <span id="toastMsg">Operação realizada.</span>
+  <div class="app-toast" id="div-toast" role="status">
+    <span aria-hidden="true" class="material-symbols-outlined toast-icon" id="span-toast-icone">check_circle</span>
+    <span id="span-toast-msg">Operação realizada.</span>
   </div>
 
   <!-- Rodapé compartilhado (../../footer.html), injetado pelo util/shell.js -->
-  <div id="appFooter"></div>
+  <div id="div-app-footer"></div>
 
   <script src="../../../assets/libraries/jquery/jquery.min.js"></script>
   <script src="../../../assets/libraries/bootstrap/bootstrap.bundle.min.js"></script>

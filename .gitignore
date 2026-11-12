@@ -13,3 +13,6 @@ app/**/*.css.map
 # Arquivos de segredos e variáveis de ambiente (nunca versionar)
 .env
 .env.*
+
+# Skills do assistente de IA (uso local, fora da entrega)
+/.claude
